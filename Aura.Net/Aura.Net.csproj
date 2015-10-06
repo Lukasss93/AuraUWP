@@ -33,6 +33,9 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_PHONE_APP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
     <DebugSymbols>true</DebugSymbols>
@@ -84,6 +87,8 @@
     <Compile Include="Common\AlphaKeyGroup.cs" />
     <Compile Include="Common\BaseModel.cs" />
     <Compile Include="Common\ContinuationManager.cs" />
+    <Compile Include="Common\IIncrementalSource.cs" />
+    <Compile Include="Common\IncrementalLoadingCollection.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
