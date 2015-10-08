@@ -115,6 +115,7 @@
     <Compile Include="IAPHelper.cs" />
     <Compile Include="Imaging\Base64.cs" />
     <Compile Include="Imaging\ImageHelper.cs" />
+    <Compile Include="Imaging\Scratcher.cs" />
     <Compile Include="Localization\Language.cs" />
     <Compile Include="Localization\LanguageHelper.cs" />
     <Compile Include="Localization\Translate.cs" />
