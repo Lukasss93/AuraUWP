@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Globalization.Collation;
 
-namespace Aura8RT.Common
+namespace Aura.Net.Common
 {
     public class AlphaKeyGroup<T> : List<T>
     {

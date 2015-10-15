@@ -7,7 +7,7 @@ using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
 
-namespace Aura8RT.Cryptography
+namespace Aura.Net.Cryptography
 {
     public class MD5
     {

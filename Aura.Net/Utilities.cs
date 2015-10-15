@@ -206,5 +206,33 @@ namespace Aura.Net
                 return (false);
         }
 
+        public static Thickness SetMarginTop(FrameworkElement ele, double value)
+        {
+            Thickness margin = ele.Margin;
+            margin.Top = value;
+            return margin;
+        }
+
+        public static Thickness SetMarginBottom(FrameworkElement ele, double value)
+        {
+            Thickness margin = ele.Margin;
+            margin.Bottom = value;
+            return margin;
+        }
+
+        public static Thickness SetMarginLeft(FrameworkElement ele, double value)
+        {
+            Thickness margin = ele.Margin;
+            margin.Left = value;
+            return margin;
+        }
+
+        public static Thickness SetMarginRight(FrameworkElement ele, double value)
+        {
+            Thickness margin = ele.Margin;
+            margin.Right = value;
+            return margin;
+        }
+
     }
 }

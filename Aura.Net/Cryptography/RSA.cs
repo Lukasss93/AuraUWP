@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Aura8RT.Cryptography
+namespace Aura.Net.Cryptography
 {
     public class RSA
     {
