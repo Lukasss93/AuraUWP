@@ -44,7 +44,7 @@ namespace Aura.Net.Common
                 async () =>
                 {
                     uint resultCount = 0;
-                    var result = await source.GetPagedItems(currentPage++, itemsPerPage);
+                    var result = await source.GetPagedItems(currentPage++, itemsPerPage, param);
 
                     if(result == null || result.Count() == 0)
                     {

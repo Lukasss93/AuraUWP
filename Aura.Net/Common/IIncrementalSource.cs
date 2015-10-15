@@ -8,6 +8,6 @@ namespace Aura.Net.Common
 {
     public interface IIncrementalSource<T>
     {
-        Task<IEnumerable<T>> GetPagedItems(int pageIndex, int pageSize);
+        Task<IEnumerable<T>> GetPagedItems(int pageIndex, int pageSize, string param);
     }
 }
