@@ -21,12 +21,14 @@ namespace Aura.Net.Common
         private int itemsPerPage;
         private bool hasMoreItems;
         private int currentPage;
+        private string param;
 
-        public IncrementalLoadingCollection(int itemsPerPage = 20)
+        public IncrementalLoadingCollection(int itemsPerPage = 20, string param=null)
         {
             this.source = new T();
             this.itemsPerPage = itemsPerPage;
             this.hasMoreItems = true;
+            this.param = param;
         }
 
         public bool HasMoreItems
