@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Aura.Net
 {
@@ -66,7 +67,7 @@ namespace Aura.Net
         /// <summary>
         /// Visualizza una finestra di dialogo con TextBox
         /// </summary>
-        public static async Task<DialogTextBoxResult> DialogTextBox(string content, string title, string box="", string ok="ok", string cancel="annulla", string sub=null, string header=null)
+        public static async Task<DialogTextBoxResult> DialogTextBox(string content, string title, string box="", string ok="ok", string cancel="annulla", string sub=null, string header=null, InputScopeNameValue scopename=InputScopeNameValue.Default)
         {
             DialogTextBoxResult risposta = new DialogTextBoxResult();
             risposta.result=false;
@@ -80,8 +81,12 @@ namespace Aura.Net
             contenuto.Text=content;
             stack.Children.Add(contenuto);
 
+            InputScope scope = new InputScope();
+            scope.Names.Add(new InputScopeName(scopename));
+
             TextBox tb = new TextBox();
             tb.Text=box;
+            tb.InputScope = scope;
             tb.Header = header;
             tb.Margin = new Thickness(0,5,0,5);
             stack.Children.Add(tb);
