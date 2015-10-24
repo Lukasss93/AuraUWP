@@ -1,5 +1,8 @@
 ﻿using Aura.Net.Animations;
+using Aura.Net.Common;
 using Aura.Net.Controls;
+using Aura.Net.Resources;
+using Aura.Net.Serializer;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +11,7 @@ using System.Reflection;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Text;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -17,126 +21,108 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// Il modello di elemento per la pagina vuota è documentato all'indirizzo http://go.microsoft.com/fwlink/?LinkID=390556
-
 namespace Aura.Net.Pages
 {
-    /// <summary>
-    /// Pagina vuota che può essere utilizzata autonomamente oppure esplorata all'interno di un frame.
-    /// </summary>
     public sealed partial class Information : Page
     {
-        InformationParameter data;
+        InformationOptions options;
 
         public Information()
         {
             this.InitializeComponent();
 
-            new TiltEffect().AddTilt(border0);
-            new TiltEffect().AddTilt(border1);
-            new TiltEffect().AddTilt(border2);
-            new TiltEffect().AddTilt(border3);
-
-            border0.Tapped += (sender, e) => { changePage(InformationParameter.Pages.INFO); };
-            border1.Tapped += (sender, e) => { changePage(InformationParameter.Pages.VERSIONS); };
-            border2.Tapped += (sender, e) => { changePage(InformationParameter.Pages.APPS); };
-            border3.Tapped += (sender, e) => { changePage(InformationParameter.Pages.PRO); };
-
-            body_pivot.SelectionChanged += body_pivot_SelectionChanged;
+            cb_rate.Click += Cb_rate_Click;
         }
 
-        void body_pivot_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void Cb_rate_Click(object sender, RoutedEventArgs e)
         {
-            int index = (sender as Pivot).SelectedIndex;
-
-            switch(index)
-            {
-                case 0: changePage(InformationParameter.Pages.INFO); break;
-                case 1: changePage(InformationParameter.Pages.VERSIONS); break;
-                case 2: changePage(InformationParameter.Pages.APPS); break;
-                case 3: changePage(InformationParameter.Pages.PRO); break;
-            }
+            await Utilities.Rate();
         }
 
-        /// <summary>
-        /// Richiamato quando la pagina sta per essere visualizzata in un Frame.
-        /// </summary>
-        /// <param name="e">Dati dell'evento in cui vengono descritte le modalità con cui la pagina è stata raggiunta.
-        /// Questo parametro viene in genere utilizzato per configurare la pagina.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            if(e.Parameter != null && e.Parameter is InformationParameter)
+            try
             {
-                data = (InformationParameter)e.Parameter;
+                if(e.Parameter != null && e.Parameter is string && Json.isValidJson(e.Parameter as string))
+                {
+                    options = Json.Deserialize<InformationOptions>((string)e.Parameter);
 
-                if(data.Pro == false) { body_pivot.Items.RemoveAt(3); }
-                border3.Visibility = data.Pro == false ? Visibility.Collapsed : Visibility.Visible;
+                    ChangePage(options.Page);
 
-                changePage(data.Page);
+                    body_pivot_info.Header = options.AboutMePage.Header;
+                    if(options.AboutMePage.Avatar != null) { aboutme_avatar.Background = new ImageBrush() { ImageSource = new BitmapImage(options.AboutMePage.Avatar) }; }
+                    aboutme_fullname.Text = options.AboutMePage.FullName;
+                    aboutme_nickname.Text = options.AboutMePage.Nickname;
+                    GenerateLinks(options.AboutMePage.Links);
 
-                icon0.Visibility = data.NavbarIcons.UriInfo==null?Visibility.Collapsed:Visibility.Visible;
-                icon1.Visibility = data.NavbarIcons.UriVersions == null ? Visibility.Collapsed : Visibility.Visible;
-                icon2.Visibility = data.NavbarIcons.UriApps == null ? Visibility.Collapsed : Visibility.Visible;
-                icon3.Visibility = data.NavbarIcons.UriPro == null ? Visibility.Collapsed : Visibility.Visible;
+                    body_pivot_versions.Header = options.ChangelogPage.Header;
+                    if(options.ChangelogPage.AppLogo != null) { changelog_applogo.Source = new BitmapImage(options.ChangelogPage.AppLogo); }
+                    changelog_appname.Text = options.ChangelogPage.AppName;
+                    Changelog.GenerateChangelog(options.ChangelogPage.Changes, changelog_changes);
 
-                icon0.UriSource = data.NavbarIcons.UriInfo;
-                icon1.UriSource = data.NavbarIcons.UriVersions;
-                icon2.UriSource = data.NavbarIcons.UriApps;
-                icon3.UriSource = data.NavbarIcons.UriPro;
+                    body_pivot_apps.Header = options.MyAppsPage.Header;
+                    MyApps.GenerateItems(myapps_stack, options.MyAppsPage.MyAppsList);
 
-                avatar.Fill = new ImageBrush() { ImageSource = new BitmapImage(data.Info.UriAvatar) };
-
-                Changelog.GenerateChangelog(data.Changelog, stack_versions);
+                    body_pivot_pro.Header = options.ProPage.Header;
+                    if(options.ProPage.ProEnabled == false) { body_pivot.Items.RemoveAt(3); }
+                }
             }
-            else
+            catch(Exception ex)
             {
-                Utilities.goBack();
-                throw new Exception("Non è stato passato il parametro InformationParameter.");                
+                MessageDialogHelper.Show(ex.Message + "\n" + ex.StackTrace);
             }
         }
 
-        private void changePage(InformationParameter.Pages p)
+        private void GenerateLinks(List<Link> links)
         {
-            border0.BorderBrush = null;
-            border1.BorderBrush = null;
-            border2.BorderBrush = null;
-            border3.BorderBrush = null;
-
-            icon0.Foreground = Resources["PhoneForegroundBrush"] as Brush;
-            icon1.Foreground = Resources["PhoneForegroundBrush"] as Brush;
-            icon2.Foreground = Resources["PhoneForegroundBrush"] as Brush;
-            icon3.Foreground = Resources["PhoneForegroundBrush"] as Brush;
-
-            text0.Foreground = Resources["PhoneForegroundBrush"] as Brush;
-            text1.Foreground = Resources["PhoneForegroundBrush"] as Brush;
-            text2.Foreground = Resources["PhoneForegroundBrush"] as Brush;
-            text3.Foreground = Resources["PhoneForegroundBrush"] as Brush;
-
-            switch(p)
+            aboutme_links_stack.Children.Clear();
+            foreach(var link in links)
             {
-                case InformationParameter.Pages.INFO:
-                    border0.BorderBrush = Resources["PhoneAccentBrush"] as Brush;
-                    icon0.Foreground = Resources["PhoneAccentBrush"] as Brush;
-                    text0.Foreground = Resources["PhoneAccentBrush"] as Brush;
+                StackPanel stack = new StackPanel();
+                stack.Margin = new Thickness(0, 0, 0, 10);
+                stack.VerticalAlignment = VerticalAlignment.Top;
+
+                TextBlock header = new TextBlock();
+                header.FontFamily = new FontFamily("Segoe WP");
+                header.FontWeight = FontWeights.Bold;
+                header.VerticalAlignment = VerticalAlignment.Top;
+                header.FontSize=22;
+                header.Text = link.Header.ToUpper();
+                stack.Children.Add(header);
+
+                HyperlinkButton value = new HyperlinkButton();
+                value.HorizontalAlignment = HorizontalAlignment.Left;
+                value.VerticalAlignment = VerticalAlignment.Top;
+                value.Foreground = MyColors.PhoneAccentBrush;
+                value.FontSize = 20;
+                value.Margin = new Thickness(0,-10,0,0);
+                value.Content = link.Content;
+                value.NavigateUri = link.NavUri;
+                stack.Children.Add(value);
+
+                aboutme_links_stack.Children.Add(stack);
+            }
+        }
+
+        private void ChangePage(InformationOptions.Pages page)
+        {
+            switch(page)
+            {
+                default:
+                case InformationOptions.Pages.ABOUTME:
                     body_pivot.SelectedIndex = 0;
                     break;
-                case InformationParameter.Pages.VERSIONS:
-                    border1.BorderBrush = Resources["PhoneAccentBrush"] as Brush;
-                    icon1.Foreground = Resources["PhoneAccentBrush"] as Brush;
-                    text1.Foreground = Resources["PhoneAccentBrush"] as Brush;
+
+                case InformationOptions.Pages.CHANGELOG:
                     body_pivot.SelectedIndex = 1;
                     break;
-                case InformationParameter.Pages.APPS:
-                    border2.BorderBrush = Resources["PhoneAccentBrush"] as Brush;
-                    icon2.Foreground = Resources["PhoneAccentBrush"] as Brush;
-                    text2.Foreground = Resources["PhoneAccentBrush"] as Brush;
+
+                case InformationOptions.Pages.MYAPPS:
                     body_pivot.SelectedIndex = 2;
                     break;
-                case InformationParameter.Pages.PRO:
-                    border3.BorderBrush = Resources["PhoneAccentBrush"] as Brush;
-                    icon3.Foreground = Resources["PhoneAccentBrush"] as Brush;
-                    text3.Foreground = Resources["PhoneAccentBrush"] as Brush;
-                    body_pivot.SelectedIndex = 3;
+
+                case InformationOptions.Pages.PRO:
+                    body_pivot.SelectedIndex = options.ProPage.ProEnabled ? 3 : 0;
                     break;
             }
         }

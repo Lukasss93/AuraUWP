@@ -233,6 +233,5 @@ namespace Aura.Net
             margin.Right = value;
             return margin;
         }
-
     }
 }

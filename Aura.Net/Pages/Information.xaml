@@ -7,155 +7,81 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <Page.Resources>
-        <Thickness x:Key="PivotPortraitThemePadding">0,0,0,0</Thickness>
-        <Thickness x:Key="PivotLandscapeThemePadding">0,0,0,0</Thickness>
-        <Style x:Key="PivotStyle1" TargetType="Pivot">
-            <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="Foreground" Value="{ThemeResource PhoneForegroundBrush}"/>
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="ItemsPanel">
-                <Setter.Value>
-                    <ItemsPanelTemplate>
-                        <Grid/>
-                    </ItemsPanelTemplate>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="Pivot">
-                        <Grid x:Name="RootElement" Background="{TemplateBinding Background}" VerticalAlignment="{TemplateBinding VerticalAlignment}" RenderTransformOrigin="0,0">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto"/>
-                                <RowDefinition Height="*"/>
-                            </Grid.RowDefinitions>
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="Orientation">
-                                    <VisualState x:Name="Portrait">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotPortraitThemePadding}"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Landscape">
-                                        <Storyboard>
-                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" Storyboard.TargetName="TitleContentControl">
-                                                <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource PivotLandscapeThemePadding}"/>
-                                            </ObjectAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentControl x:Name="TitleContentControl" ContentTemplate="{TemplateBinding TitleTemplate}" Content="{TemplateBinding Title}" Style="{StaticResource PivotTitleContentControlStyle}" Visibility="Collapsed"/>
-                            <ScrollViewer x:Name="ScrollViewer" HorizontalSnapPointsAlignment="Center" HorizontalSnapPointsType="MandatorySingle" HorizontalScrollBarVisibility="Hidden" Margin="{TemplateBinding Padding}" Grid.Row="1" Template="{StaticResource ScrollViewerScrollBarlessTemplate}" VerticalSnapPointsType="None" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" VerticalContentAlignment="Stretch" ZoomMode="Disabled">
-                                <PivotPanel x:Name="Panel" VerticalAlignment="Stretch">
-                                    <PivotHeaderPanel x:Name="Header" Visibility="Collapsed">
-                                        <PivotHeaderPanel.RenderTransform>
-                                            <CompositeTransform x:Name="HeaderTranslateTransform" TranslateX="0"/>
-                                        </PivotHeaderPanel.RenderTransform>
-                                    </PivotHeaderPanel>
-                                    <ItemsPresenter x:Name="PivotItemPresenter">
-                                        <ItemsPresenter.RenderTransform>
-                                            <TranslateTransform x:Name="ItemsPresenterTranslateTransform" X="0"/>
-                                        </ItemsPresenter.RenderTransform>
-                                    </ItemsPresenter>
-                                </PivotPanel>
-                            </ScrollViewer>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-        <Thickness x:Key="PivotItemMargin">0,0,0,0</Thickness>
-        <Style x:Key="PivotItemStyle1" TargetType="PivotItem">
-            <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Margin" Value="{ThemeResource PivotItemMargin}"/>
-            <Setter Property="Padding" Value="0"/>
-            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-            <Setter Property="VerticalContentAlignment" Value="Stretch"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="PivotItem">
-                        <Grid Background="{TemplateBinding Background}" HorizontalAlignment="{TemplateBinding HorizontalAlignment}" VerticalAlignment="{TemplateBinding VerticalAlignment}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="Pivot">
-                                    <VisualState x:Name="Right"/>
-                                    <VisualState x:Name="Left"/>
-                                    <VisualState x:Name="Center"/>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-    </Page.Resources>
+    <Page.BottomAppBar>
+        <CommandBar x:Name="cb" Background="{ThemeResource PhoneAccentBrush}">
+            <AppBarButton x:Name="cb_rate" Icon="SolidStar" Label="vota"/>
+        </CommandBar>
+    </Page.BottomAppBar>
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
-        </Grid.RowDefinitions>
-        <Grid x:Name="header" VerticalAlignment="Top" Background="{ThemeResource PhoneChromeBrush}">
-            <StackPanel x:Name="navbar" HorizontalAlignment="Center" Orientation="Horizontal">
-                <Border x:Name="border0" BorderThickness="0,0,0,2" Width="80" MinHeight="60" Background="{ThemeResource PhoneChromeBrush}">
-                    <StackPanel VerticalAlignment="Center">
-                        <BitmapIcon x:Name="icon0" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource PhoneAccentBrush}" Margin="0,5,0,0"/>
-                        <TextBlock x:Name="text0" TextWrapping="Wrap" Text="Info" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Segoe WP" FontSize="14" TextAlignment="Center" Foreground="{ThemeResource PhoneForegroundBrush}" Margin="0,5"/>
-                    </StackPanel>
-                </Border>
-                <Border x:Name="border1" BorderThickness="0,0,0,2" Width="80" MinHeight="60" Background="{ThemeResource PhoneChromeBrush}">
-                    <StackPanel VerticalAlignment="Center">
-                        <BitmapIcon x:Name="icon1" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource PhoneAccentBrush}" Margin="0,5,0,0"/>
-                        <TextBlock x:Name="text1" TextWrapping="Wrap" Text="Versioni" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Segoe WP" FontSize="14" TextAlignment="Center" Foreground="{ThemeResource PhoneForegroundBrush}" Margin="0,5"/>
-                    </StackPanel>
-                </Border>
-                <Border x:Name="border2" BorderThickness="0,0,0,2" Width="80" MinHeight="60" Background="{ThemeResource PhoneChromeBrush}">
-                    <StackPanel VerticalAlignment="Center">
-                        <BitmapIcon x:Name="icon2" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource PhoneAccentBrush}" Margin="0,5,0,0"/>
-                        <TextBlock x:Name="text2" TextWrapping="Wrap" Text="Altre app" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Segoe WP" FontSize="14" TextAlignment="Center" Foreground="{ThemeResource PhoneForegroundBrush}" Margin="0,5"/>
-                    </StackPanel>
-                </Border>
-                <Border x:Name="border3" BorderThickness="0,0,0,2" Width="80" MinHeight="60" Background="{ThemeResource PhoneChromeBrush}">
-                    <StackPanel VerticalAlignment="Center">
-                        <BitmapIcon x:Name="icon3" Height="30" Width="30" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="{ThemeResource PhoneAccentBrush}" Margin="0,5,0,0"/>
-                        <TextBlock x:Name="text3" TextWrapping="Wrap" Text="Pro" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Segoe WP" FontSize="14" TextAlignment="Center" Foreground="{ThemeResource PhoneForegroundBrush}" Margin="0,5"/>
-                    </StackPanel>
-                </Border>
-            </StackPanel>
-        </Grid>
-        <Grid x:Name="body" Grid.Row="1">
-            <Pivot x:Name="body_pivot" Title="" Style="{StaticResource PivotStyle1}" ItemContainerStyle="{StaticResource PivotItemStyle1}" Margin="0,27,0,0">
-                <PivotItem x:Name="body_pivot_info" Header="">
-                    <Grid>
-                        <ScrollViewer Margin="19,19,19,0">
-                            <StackPanel VerticalAlignment="Top">
-                                <Ellipse x:Name="avatar" Height="100" Width="100" HorizontalAlignment="Left" Fill="{ThemeResource PhoneChromeBrush}"/>
-                            </StackPanel>
-                        </ScrollViewer>
+    <Page.Transitions>
+        <TransitionCollection>
+            <NavigationThemeTransition>
+                <NavigationThemeTransition.DefaultNavigationTransitionInfo>
+                    <ContinuumNavigationTransitionInfo/>
+                </NavigationThemeTransition.DefaultNavigationTransitionInfo>
+            </NavigationThemeTransition>
+        </TransitionCollection>
+    </Page.Transitions>
+    
+    <Grid Background="{ThemeResource PhoneChromeBrush}">
+        <Pivot x:Name="body_pivot" Margin="0">
+            <Pivot.HeaderTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding}" FontFamily="Segoe WP" FontWeight="Bold" FontSize="18.667"/>
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <PivotItem x:Name="body_pivot_info" Header="CHI SONO">
+                <Grid>
+                    <ScrollViewer>
+                        <StackPanel VerticalAlignment="Top">
+                            <Grid VerticalAlignment="Top" Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <Border x:Name="aboutme_avatar" Height="100" Width="100" CornerRadius="100" HorizontalAlignment="Left" VerticalAlignment="Top" BorderThickness="0" Background="#3FFFFFFF"/>
+                                <StackPanel Orientation="Vertical" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Top">
+                                    <TextBlock x:Name="aboutme_fullname" TextWrapping="Wrap" Text="FullName" FontFamily="Segoe WP" FontSize="29.333"/>
+                                    <TextBlock x:Name="aboutme_nickname" TextWrapping="Wrap" Text="@Nickname" FontFamily="Segoe WP" FontSize="18.667" Margin="0,0,-0.167,0" Height="23" Foreground="{ThemeResource PhoneMidBrush}"/>
+                                </StackPanel>
+                            </Grid>
+                            <StackPanel x:Name="aboutme_links_stack" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Name="body_pivot_versions" Header="CHANGELOG">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid Height="80" Margin="0,0,0,10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Background="#3FFFFFFF"/>
+                        <Image x:Name="changelog_applogo"/>
+                        <TextBlock x:Name="changelog_appname" TextWrapping="Wrap" Text="App Name" Grid.Column="1" FontFamily="Segoe WP" FontSize="24" Margin="10,0,0,0" TextTrimming="CharacterEllipsis" FontWeight="Light"/>
                     </Grid>
-                </PivotItem>
-                <PivotItem x:Name="body_pivot_versions" Header="">
-                    <Grid>
-                        <ScrollViewer Margin="19,19,19,0">
-                            <StackPanel x:Name="stack_versions" VerticalAlignment="Top"/>
-                        </ScrollViewer>
-                    </Grid>
-                </PivotItem>
-                <PivotItem x:Name="body_pivot_apps" Header="PivotItem 2">
-                    <Grid>
-                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="2" VerticalAlignment="Center" FontSize="36" Margin="190.297,265.483,189.703,264.517"/>
-                    </Grid>
-                </PivotItem>
-                <PivotItem x:Name="body_pivot_pro" Header="PivotItem 3">
-                    <Grid>
-                        <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="3" VerticalAlignment="Center" FontSize="36" Margin="190.297,265.483,189.703,264.517"/>
-                    </Grid>
-                </PivotItem>
-            </Pivot>
-        </Grid>
+                    <ScrollViewer Grid.Row="1">
+                        <StackPanel x:Name="changelog_changes" VerticalAlignment="Top"/>
+                    </ScrollViewer>
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Name="body_pivot_apps" Header="ALTRE APP">
+                <Grid>
+                    <ScrollViewer>
+                        <StackPanel x:Name="myapps_stack" VerticalAlignment="Top"/>
+                    </ScrollViewer>
+                </Grid>
+            </PivotItem>
+            <PivotItem x:Name="body_pivot_pro" Header="PRO">
+                <Grid>
+                    <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" Text="3" VerticalAlignment="Center" FontSize="36" Margin="190.297,265.483,189.703,264.517"/>
+                </Grid>
+            </PivotItem>
+        </Pivot>
     </Grid>
 </Page>

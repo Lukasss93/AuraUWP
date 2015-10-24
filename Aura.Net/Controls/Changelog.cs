@@ -1,4 +1,5 @@
-﻿using Aura.Net.Resources;
+﻿using Aura.Net.Extensions;
+using Aura.Net.Resources;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,31 +19,32 @@ namespace Aura.Net.Controls
     /// </summary>
     public class Changelog
     {
-        /// <summary>Versione della lista dei cambiamenti.</summary>
-        private Version _version { get; set; }
-        /// <summary>Lista di cambiamenti.</summary>
-        private List<string> _changes { get; set; }
-
         /// <summary>Costruttore che inizializza un elemento Changelog.</summary>
         /// <param name="version">Versione della lista dei cambiamenti.</param>
-        /// <param name="changes">Lista di cambiamenti.</param>
+        /// <param name="changes">Lista dei cambiamenti.</param>
         public Changelog(Version version, List<string> changes)
         {
-            _version = version;
-            _changes = changes;
+            this.Version = version;
+            this.Changes = changes;
         }
 
-        /// <summary>Restituisce la versione della lista dei cambiamenti.</summary>
-        public Version GetVersion()
+        private Version version;
+
+        public Version Version
         {
-            return _version;
+            get { return version; }
+            set { version = value; }
         }
 
-        /// <summary>Restituisce la lista dei cambiamenti.</summary>
-        public List<string> GetChanges()
+        private List<string> changes;
+
+        public List<string> Changes
         {
-            return _changes;
+            get { return changes; }
+            set { changes = value; }
         }
+
+
 
         /// <summary>Stampa in uno StackPanel in input tutti gli elementi della lista della lista di Changelog.</summary>
         /// <param name="list">Lista di Changelog.</param>
@@ -68,17 +70,17 @@ namespace Aura.Net.Controls
                 TextBlock versione = new TextBlock();
                 versione.FontFamily = new FontFamily("Segoe WP");
                 versione.FontWeight= FontWeights.Thin;
-                versione.FontSize= 34;
+                versione.FontSize= 36;
                 versione.Foreground = versionforeground == null ? MyColors.PhoneAccentBrush : versionforeground;
 
-                versione.Inlines.Add(new Run() { Text = item.GetVersion().ToString() });
-                if(i == 1) { versione.Inlines.Add(new Run() { Text = " (" + currentstring + ")", FontSize=22 }); }
+                versione.Inlines.Add(new Run() { Text = item.Version.ToStringRelevance() });
+                if(i == 1) { versione.Inlines.Add(new Run() { Text = " (" + currentstring + ")", FontSize=26 }); }
 
 
 
                 pannello.Children.Add(versione);
 
-                foreach(string cambiamento in item.GetChanges())
+                foreach(string cambiamento in item.Changes)
                 {
                     TextBlock testo_cambiamento = new TextBlock();
                     testo_cambiamento.Foreground = textforeground == null ? Application.Current.Resources["PhoneForegroundBrush"] as Brush : textforeground;
@@ -87,6 +89,7 @@ namespace Aura.Net.Controls
                     testo_cambiamento.TextWrapping=TextWrapping.Wrap;
                     testo_cambiamento.FontSize= 18;
                     testo_cambiamento.Text = "• " + cambiamento;
+                    testo_cambiamento.Margin = new Thickness(5,0,0,0);
                     pannello.Children.Add(testo_cambiamento);
 
                 }
