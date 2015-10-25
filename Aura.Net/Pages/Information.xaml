@@ -8,7 +8,7 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Page.BottomAppBar>
-        <CommandBar x:Name="cb" Background="{ThemeResource PhoneAccentBrush}">
+        <CommandBar x:Name="cb" Background="{ThemeResource PhoneAccentBrush}" Foreground="White">
             <AppBarButton x:Name="cb_rate" Icon="SolidStar" Label="vota"/>
         </CommandBar>
     </Page.BottomAppBar>

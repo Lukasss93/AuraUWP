@@ -161,6 +161,23 @@ namespace Aura.Net.Pages
                 set { changes = value; }
             }
 
+            private string current;
+
+            public string Current
+            {
+                get { return current; }
+                set { current = value; }
+            }
+
+            private string rate;
+
+            public string Rate
+            {
+                get { return rate; }
+                set { rate = value; }
+            }
+
+
 
         }
 

@@ -58,13 +58,15 @@ namespace Aura.Net.Pages
                     body_pivot_versions.Header = options.ChangelogPage.Header;
                     if(options.ChangelogPage.AppLogo != null) { changelog_applogo.Source = new BitmapImage(options.ChangelogPage.AppLogo); }
                     changelog_appname.Text = options.ChangelogPage.AppName;
-                    Changelog.GenerateChangelog(options.ChangelogPage.Changes, changelog_changes);
+                    Changelog.GenerateChangelog(options.ChangelogPage.Changes, changelog_changes,options.ChangelogPage.Current);
 
                     body_pivot_apps.Header = options.MyAppsPage.Header;
                     MyApps.GenerateItems(myapps_stack, options.MyAppsPage.MyAppsList);
 
                     body_pivot_pro.Header = options.ProPage.Header;
                     if(options.ProPage.ProEnabled == false) { body_pivot.Items.RemoveAt(3); }
+
+                    cb_rate.Label = options.ChangelogPage.Rate;
                 }
             }
             catch(Exception ex)

@@ -1,4 +1,5 @@
 ﻿using Aura.Net.Animations;
+using Aura.Net.Resources;
 using System;
 using System.Collections.Generic;
 using Windows.System;
