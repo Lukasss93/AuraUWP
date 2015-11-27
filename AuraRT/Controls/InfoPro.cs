@@ -1,4 +1,4 @@
-﻿using AuraRT.Resources;
+﻿using AuraRT.Imaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +61,7 @@ namespace AuraRT.Controls
             infopro_griglia.Children.Add(title_pro);
 
             Border border_gratis = new Border();
-            border_gratis.BorderBrush = MyColors.PhoneChromeBrush;
+            border_gratis.BorderBrush = ColorUtilities.PhoneChromeBrush;
             border_gratis.BorderThickness = new Thickness(1, 0, 0, 0);
             border_gratis.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
             border_gratis.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
@@ -71,7 +71,7 @@ namespace AuraRT.Controls
             infopro_griglia.Children.Add(border_gratis);
 
             Border border_pro = new Border();
-            border_pro.BorderBrush = MyColors.PhoneChromeBrush;
+            border_pro.BorderBrush = ColorUtilities.PhoneChromeBrush;
             border_pro.BorderThickness = new Thickness(1, 0, 0, 0);
             border_pro.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Left;
             border_pro.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Stretch;
@@ -97,7 +97,7 @@ namespace AuraRT.Controls
                 infopro_gratis.FontFamily = new Windows.UI.Xaml.Media.FontFamily("Segoe UI Symbol");
                 infopro_gratis.FontSize = 14;
                 infopro_gratis.Text = item.gratis;
-                infopro_gratis.Foreground = MyColors.Red;
+                infopro_gratis.Foreground = new SolidColorBrush(Colors.Red);
                 infopro_gratis.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Center;
                 infopro_gratis.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Center;
                 Grid.SetRow(infopro_gratis, r);
@@ -116,7 +116,7 @@ namespace AuraRT.Controls
                 infopro_griglia.Children.Add(infopro_pro);
 
                 Border border_riga = new Border();
-                border_riga.BorderBrush = MyColors.PhoneChromeBrush;
+                border_riga.BorderBrush = ColorUtilities.PhoneChromeBrush;
                 border_riga.BorderThickness = new Thickness(0, 1, 0, 0);
                 border_riga.HorizontalAlignment = Windows.UI.Xaml.HorizontalAlignment.Stretch;
                 border_riga.VerticalAlignment = Windows.UI.Xaml.VerticalAlignment.Top;

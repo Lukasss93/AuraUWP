@@ -1,5 +1,4 @@
 ﻿using AuraRT.Animations;
-using AuraRT.Resources;
 using System;
 using System.Collections.Generic;
 using Windows.System;

@@ -1,5 +1,5 @@
 ﻿using AuraRT.Extensions;
-using AuraRT.Resources;
+using AuraRT.Imaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -71,7 +71,7 @@ namespace AuraRT.Controls
                 versione.FontFamily = new FontFamily("Segoe WP");
                 versione.FontWeight= FontWeights.Thin;
                 versione.FontSize= 30;
-                versione.Foreground = versionforeground == null ? MyColors.PhoneAccentBrush : versionforeground;
+                versione.Foreground = versionforeground == null ? ColorUtilities.PhoneAccentBrush : versionforeground;
 
                 versione.Inlines.Add(new Run() { Text = item.Version.ToStringRelevance() });
                 if(i == 1) { versione.Inlines.Add(new Run() { Text = " (" + currentstring + ")", FontSize=20 }); }

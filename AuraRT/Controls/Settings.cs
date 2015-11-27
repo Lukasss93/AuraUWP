@@ -6,7 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using AuraRT.Extensions;
-using AuraRT.Resources;
+using AuraRT.Imaging;
 
 namespace AuraRT.Controls
 {
@@ -111,7 +111,7 @@ namespace AuraRT.Controls
                 TextBlock impo_sub = new TextBlock();
                 impo_sub.FontSize = 18;
                 impo_sub.FontFamily = new FontFamily("Segoe WP");
-                impo_sub.Foreground = MyColors.PhoneLowBrush;
+                impo_sub.Foreground = ColorUtilities.PhoneLowBrush;
                 impo_sub.Text = item.GetDescription().ToUpperFirst();
                 testi.Children.Add(impo_sub);
 
