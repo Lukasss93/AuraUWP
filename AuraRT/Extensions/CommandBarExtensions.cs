@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace AuraRT.Extensions
 {
-    public static class CommandBar_Extension
+    public static class CommandBarExtensions
     {
         /// <summary>
         /// Pulisce i pulsanti primari dalla commandbar

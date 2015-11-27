@@ -175,16 +175,7 @@ namespace AuraRT.Utilities
 
             return networkAdapterId.ToUpper();
         }
-
-        public static string md5(string input)
-        {
-            var alg = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
-            IBuffer buffer = CryptographicBuffer.ConvertStringToBinary(input, BinaryStringEncoding.Utf8);
-            var hashed = alg.HashData(buffer);
-            var result = CryptographicBuffer.EncodeToHexString(hashed);
-            return result;
-        }
-
+        
         public static void goBack()
         {
             Frame rootFrame = Window.Current.Content as Frame;
@@ -232,6 +223,11 @@ namespace AuraRT.Utilities
             Thickness margin = ele.Margin;
             margin.Right = value;
             return margin;
+        }
+
+        public static bool IsInDesignMode
+        {
+            get { return Windows.ApplicationModel.DesignMode.DesignModeEnabled; }
         }
     }
 }

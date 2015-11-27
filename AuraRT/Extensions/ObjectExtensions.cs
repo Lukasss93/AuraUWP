@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AuraRT.Extensions
 {
-    public static class Object_Extension
+    public static class ObjectExtensions
     {
         public static string ToStringNullSafe(this object value)
         {

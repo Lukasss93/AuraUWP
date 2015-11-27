@@ -7,7 +7,7 @@ using Windows.Storage;
 
 namespace AuraRT.Extensions
 {
-    public static class StorageFile_Extension
+    public static class StorageFileExtensions
     {
         /// <summary>
         /// Legge un file in una stringa

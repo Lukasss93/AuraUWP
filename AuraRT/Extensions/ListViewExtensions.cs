@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace AuraRT.Extensions
 {
-    public static class ListView_Extension
+    public static class ListViewExtensions
     {
         /// <summary>
         /// Restituisce true, se la modalità seleziona (multiple o extended) è attiva

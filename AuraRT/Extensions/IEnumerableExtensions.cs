@@ -7,7 +7,7 @@ using Windows.Globalization.Collation;
 
 namespace AuraRT.Extensions
 {
-    public static class IEnumerable_Extension
+    public static class IEnumerableExtensions
     {
         /// <summary>
         /// Groups and sorts into a list of group lists based on a selector.

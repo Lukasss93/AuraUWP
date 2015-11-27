@@ -8,7 +8,7 @@ using Windows.UI.ViewManagement;
 
 namespace AuraRT.Extensions
 {
-    public static class StatusBar_Extension
+    public static class StatusBarExtensions
     {
         /// <summary>
         /// Restituisce vero se la statusbar è visibile altrimenti falso se non lo è

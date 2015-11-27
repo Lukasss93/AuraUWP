@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AuraRT.Extensions
 {
-    public static class Version_Extension
+    public static class VersionExtensions
     {
         public static string ToStringRelevance(this Version v)
         {

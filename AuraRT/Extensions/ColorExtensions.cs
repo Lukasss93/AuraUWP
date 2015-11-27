@@ -7,7 +7,7 @@ using Windows.UI;
 
 namespace AuraRT.Extensions
 {
-    public static class Color_Extension
+    public static class ColorExtensions
     {
         public static Color GetColorDarker(this Color color, double factor)
         {
