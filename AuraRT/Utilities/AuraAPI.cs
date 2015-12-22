@@ -90,19 +90,19 @@ namespace Lukasss93
             GET,
             POST
         }
+        
+    }
 
+    public class AuraAPIError
+    {
 
-        public class AuraAPIError
+        public string code { get; private set; }
+        public string message { get; private set; }
+
+        public AuraAPIError(string code, string message)
         {
-
-            public string code { get; private set; }
-            public string message { get; private set; }
-
-            public AuraAPIError(string code, string message)
-            {
-                this.code = code;
-                this.message = message;
-            }
+            this.code = code;
+            this.message = message;
         }
     }
 
