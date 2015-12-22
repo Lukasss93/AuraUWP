@@ -10,28 +10,16 @@ using System.Threading.Tasks;
 
 namespace AuraRT.Utilities
 {
-    public class AuraAPI<T>
+    public class AuraAPI
     {
-        public bool status { get; private set; }
-        public AuraAPIError error { get; private set; }
-        public T output { get; private set; }
-
-        public AuraAPI()
+        public static async Task<AuraAPIResult<T>> SendRequest<T>(string url, RequestType type, Dictionary<string, string> parameters = null)
         {
-            this.status = false;
-            this.error = null;
-            this.output = default(T);
-        }
-
-        public static async Task SendRequest<T>(string url, RequestType type, Dictionary<string, string> parameters = null)
-        {
-            AuraAPI<T> apiresult = new AuraAPI<T>();
+            AuraAPIResult<T> apiresult = new AuraAPIResult<T>();
 
             parameters = (parameters == null) ? new Dictionary<string, string>() : parameters;
 
             //inizializza risultato
             string content = null;
-            AuraAPI<T> result = null;
 
             //avvio la connessione
             HttpClient client = new HttpClient();
@@ -55,7 +43,7 @@ namespace AuraRT.Utilities
 
                 try
                 {
-                    result = Json.Deserialize<AuraAPI<T>>(content);
+                    apiresult = Json.Deserialize<AuraAPIResult<T>>(content);
                 }
                 catch(Exception ex)
                 {
@@ -64,10 +52,6 @@ namespace AuraRT.Utilities
                         "Message: " + ex.Message + "\n\n" +
                         "Content: " + content);
                 }
-
-                apiresult.status = result.status;
-                apiresult.error = result.error;
-                apiresult.output = result.output;
             }
             else if(HttpUtilities.IsConnectedToInternet() == false)
             {
@@ -77,29 +61,44 @@ namespace AuraRT.Utilities
             {
                 apiresult.SetError("NOTFOUND", "Api url not found.");
             }
-        }
 
-        private void SetError(string code, string message)
+            return apiresult;
+        }
+    }
+
+    public class AuraAPIResult<T>
+    {
+        public bool status { get; set; }
+        public AuraAPIError error { get; set; }
+        public T output { get; set; }
+
+        public AuraAPIResult()
+        {
+            this.status = false;
+            this.error = null;
+            this.output = default(T);
+        }
+        
+        public void SetError(string code, string message)
         {
             this.status = false;
             this.error = new AuraAPIError(code, message);
             this.output = default(T);
         }
+                
+    }
 
-
-        public enum RequestType
-        {
-            GET,
-            POST
-        }
-        
+    public enum RequestType
+    {
+        GET,
+        POST
     }
 
     public class AuraAPIError
     {
 
-        public string code { get; private set; }
-        public string message { get; private set; }
+        public string code { get; set; }
+        public string message { get; set; }
 
         public AuraAPIError(string code, string message)
         {
