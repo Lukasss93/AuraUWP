@@ -23,8 +23,10 @@ namespace Lukasss93
             this.output = default(T);
         }
 
-        public async Task SendRequest<T>(string url, RequestType type, Dictionary<string, string> parameters = null)
+        public static async Task SendRequest<T>(string url, RequestType type, Dictionary<string, string> parameters = null)
         {
+            AuraAPI<T> apiresult = new AuraAPI<T>();
+
             parameters = (parameters == null) ? new Dictionary<string, string>() : parameters;
 
             //inizializza risultato
@@ -57,23 +59,23 @@ namespace Lukasss93
                 }
                 catch(Exception ex)
                 {
-                    SetError(
+                    apiresult.SetError(
                         "EXCEPTION-" + ex.HResult,
                         "Message: " + ex.Message + "\n\n" +
                         "Content: " + content);
                 }
 
-                this.status = result.status;
-                this.error = result.error;
-                this.output = result.output;
+                apiresult.status = result.status;
+                apiresult.error = result.error;
+                apiresult.output = result.output;
             }
             else if(HttpUtilities.IsConnectedToInternet() == false)
             {
-                SetError("CONNECTION_NOTFOUND", "Your internet connection is not found.");
+                apiresult.SetError("CONNECTION_NOTFOUND", "Your internet connection is not found.");
             }
             else
             {
-                SetError("NOTFOUND", "Api url not found.");
+                apiresult.SetError("NOTFOUND", "Api url not found.");
             }
         }
 
