@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lukasss93
+namespace AuraRT.Utilities
 {
     public class AuraAPI<T>
     {
