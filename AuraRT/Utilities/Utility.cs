@@ -138,31 +138,7 @@ namespace AuraRT.Utilities
             double resY=Window.Current.Bounds.Height * scaleFactor;
             return Convert.ToInt32(resY);
         }
-
-        /// <summary>
-        /// Restituisce un dizionario con gli argomenti di un url
-        /// </summary>
-        public static Dictionary<string, string> ParseUrlArguments(string args)
-        {
-            Dictionary<string, string> strs = new Dictionary<string, string>();
-            if (!string.IsNullOrEmpty(args))
-            {
-                char[] chrArray = new char[] { '&' };
-                string[] strArrays = args.Split(chrArray);
-                for (int i = 0; i < (int)strArrays.Length; i++)
-                {
-                    string str = strArrays[i];
-                    chrArray = new char[] { '=' };
-                    string[] strArrays1 = str.Split(chrArray);
-                    if ((int)strArrays1.Length > 0)
-                    {
-                        strs.Add(strArrays1[0], ((int)strArrays1.Length > 1 ? strArrays1[1] : string.Empty));
-                    }
-                }
-            }
-            return strs;
-        }
-
+        
         public static string getCurrentMAC()
         {
             var networkProfiles = Windows.Networking.Connectivity.NetworkInformation.GetConnectionProfiles();

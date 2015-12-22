@@ -26,13 +26,13 @@ namespace AuraRT.Utilities
         }
 
         /// <summary>Converte un timestamp unix a DateTime</summary>
-        public static DateTime FromUnixTimestampSeconds(long unixTimestamp)
+        public static DateTime TimestampToDateTime(long unixTimestamp)
         {
             return UnixEpoch.AddSeconds(unixTimestamp);
         }
 
         /// <summary>Converte un oggetto DateTime ad un unix timestamp</summary>
-        public static double ToUnixTimestampSeconds(DateTime dateTime)
+        public static double DateTimeToTimestamp(DateTime dateTime)
         {
             return (dateTime.ToUniversalTime() - UnixEpoch).TotalSeconds;
         }

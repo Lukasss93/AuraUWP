@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,9 +10,9 @@ namespace AuraRT.Utilities
 {
     public class HttpUtilities
     {
-        /// <summary>Parses a given HTTP query string into key-value pairs. </summary>
-        /// <param name="queryString">The query string to parse. </param>
-        /// <returns>The key-value pairs. </returns>
+        /// <summary>Restituisce un dizionario con gli argomenti di un url.</summary>
+        /// <param name="queryString">Parametri da passare.</param>
+        /// <returns>Dizionario chiave, valore.</returns>
         public static Dictionary<string, string> ParseQueryString(string queryString)
         {
             var dict = new Dictionary<string, string>();
@@ -25,6 +27,31 @@ namespace AuraRT.Utilities
                 }
             }
             return dict;
+        }
+        
+        public static string ParametersToString(Dictionary<string, string> parameters)
+        {
+            string output = "";
+
+            if(parameters != null)
+            {
+                int i = 0;
+                foreach(var parameter in parameters)
+                {
+                    output += parameter.Key + "=" + parameter.Value;
+
+                    output += (i != parameters.Count() - 1) ? "&" : "";
+
+                    i++;
+                }
+            }
+
+            return output;
+        }
+
+        public static bool IsConnectedToInternet()
+        {
+            return NetworkInterface.GetIsNetworkAvailable();
         }
     }
 }

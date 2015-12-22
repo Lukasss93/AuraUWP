@@ -105,6 +105,7 @@
     <Compile Include="Cryptography\RSA.cs" />
     <Compile Include="Cryptography\SHA256.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Utilities\AuraAPI.cs" />
     <Compile Include="Utilities\DateTimeUtilities.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
     <Compile Include="Extensions\CommandBarExtensions.cs" />

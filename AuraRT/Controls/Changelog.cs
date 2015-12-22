@@ -51,7 +51,7 @@ namespace AuraRT.Controls
         /// <param name="stackpanel">StackPanel in cui stampare gli elementi.</param>
         /// <param name="current">Stringa che appare nella prima versione del changelog. Default: "corrente".</param>
         /// <param name="versionforeground">Colore del testo della versione. Default: Colore principale del telefono.</param>
-        public static void GenerateChangelog(List<Changelog> list, StackPanel stackpanel, string currentstring="corrente", SolidColorBrush versionforeground=null, SolidColorBrush textforeground=null)
+        public static void GenerateChangelog(List<Changelog> list, StackPanel stackpanel, SolidColorBrush versionforeground=null, SolidColorBrush textforeground=null)
         {
             stackpanel.Children.Clear();
 
@@ -69,14 +69,10 @@ namespace AuraRT.Controls
 
                 TextBlock versione = new TextBlock();
                 versione.FontFamily = new FontFamily("Segoe WP");
-                versione.FontWeight= FontWeights.Thin;
+                versione.FontWeight = i == 1 ? FontWeights.SemiBold : FontWeights.Thin;
                 versione.FontSize= 30;
                 versione.Foreground = versionforeground == null ? ColorUtilities.PhoneAccentBrush : versionforeground;
-
-                versione.Inlines.Add(new Run() { Text = item.Version.ToStringRelevance() });
-                if(i == 1) { versione.Inlines.Add(new Run() { Text = " (" + currentstring + ")", FontSize=20 }); }
-
-
+                versione.Text = item.Version.ToStringRelevance();
 
                 pannello.Children.Add(versione);
 
