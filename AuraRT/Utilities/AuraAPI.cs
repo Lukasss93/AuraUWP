@@ -47,19 +47,16 @@ namespace AuraRT.Utilities
                 }
                 catch(Exception ex)
                 {
-                    apiresult.SetError(
-                        "EXCEPTION-" + ex.HResult,
-                        "Message: " + ex.Message + "\n\n" +
-                        "Content: " + content);
+                    apiresult.SetError("EXCEPTION",ex.HResult + "\n\n" +ex.Message + "\n\n" + content);
                 }
             }
             else if(HttpUtilities.IsConnectedToInternet() == false)
             {
-                apiresult.SetError("CONNECTION_NOTFOUND", "Your internet connection is not found.");
+                apiresult.SetError("INTERNET_NOTFOUND", "Your internet connection is not found.");
             }
             else
             {
-                apiresult.SetError("NOTFOUND", "Api url not found.");
+                apiresult.SetError("HOST_NOTFOUND", "Api url not found.");
             }
 
             return apiresult;

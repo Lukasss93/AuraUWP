@@ -19,7 +19,7 @@ namespace AuraRT.Utilities
             return min.ToString().AddZero() + ":" + sec.ToString().AddZero();
         }
 
-        /// <summary>Ottiene il timestamp in unix attuale in secondi</summary>
+        /// <summary>Ottiene il timestamp unix</summary>
         public static long GetCurrentUnixTimestampSeconds()
         {
             return (long)(DateTime.UtcNow - UnixEpoch).TotalSeconds;
@@ -35,6 +35,21 @@ namespace AuraRT.Utilities
         public static double DateTimeToTimestamp(DateTime dateTime)
         {
             return (dateTime.ToUniversalTime() - UnixEpoch).TotalSeconds;
+        }
+
+        public static TimeSpan GetDifference(DateTime time, bool localTime=false)
+        {
+            DateTime current = DateTime.UtcNow;
+            DateTime toSubstract = time;
+
+            if(localTime==true)
+            {
+                current.ToLocalTime();
+                toSubstract.ToLocalTime();
+            }
+
+            return current.Subtract(time);
+
         }
 
     }
