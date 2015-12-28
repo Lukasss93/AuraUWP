@@ -49,6 +49,19 @@ namespace AuraRT.Utilities
             return output;
         }
 
+        public static HttpContent ParametersToHttpContent(Dictionary<string,string> parameters)
+        {
+            MultipartFormDataContent form = new MultipartFormDataContent();
+            foreach(var item in parameters)
+            {
+                form.Add(new StringContent(item.Value.ToString()), item.Key);
+            }
+
+            HttpContent postdata = form;
+
+            return postdata;
+        }
+
         public static bool IsConnectedToInternet()
         {
             return NetworkInterface.GetIsNetworkAvailable();

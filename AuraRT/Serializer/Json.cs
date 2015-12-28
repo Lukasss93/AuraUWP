@@ -72,18 +72,19 @@ namespace AuraRT.Serializer
 
         public static bool isValid<T>(string str)
         {
-            var jsonobject = Json.Deserialize<object>(str);
+            bool response = false;
 
-            if(jsonobject is T)
+            try
             {
-                return true;
+                var jsonobject = Json.Deserialize<T>(str);
+                response = true;
             }
-            else
+            catch
             {
-                return false;
+                response = false;
             }
 
-
+            return response;
         }
 
 

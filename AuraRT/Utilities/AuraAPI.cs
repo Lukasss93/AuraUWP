@@ -15,48 +15,56 @@ namespace AuraRT.Utilities
         public static async Task<AuraAPIResult<T>> SendRequest<T>(string url, RequestType type, Dictionary<string, string> parameters = null)
         {
             AuraAPIResult<T> apiresult = new AuraAPIResult<T>();
-
             parameters = (parameters == null) ? new Dictionary<string, string>() : parameters;
-
-            //inizializza risultato
             string content = null;
 
-            //avvio la connessione
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = null;
-
-            if(type == RequestType.GET)
+            try
             {
-                response = await client.GetAsync(url + "?" + HttpUtilities.ParametersToString(parameters));
-            }
-            else
-            {
-                HttpContent postdata = new FormUrlEncodedContent(parameters);
-                response = await client.PostAsync(url, postdata);
-            }
+                //avvio la connessione
+                HttpClient client = new HttpClient();
+                HttpResponseMessage response = null;
 
-            //leggi risposta
-            if(response.IsSuccessStatusCode)
-            {
-                //leggi risultato
-                content = await response.Content.ReadAsStringAsync();
-
-                try
+                if(type == RequestType.GET)
                 {
-                    apiresult = Json.Deserialize<AuraAPIResult<T>>(content);
+                    response = await client.GetAsync(url + "?" + HttpUtilities.ParametersToString(parameters));
                 }
-                catch(Exception ex)
+                else
                 {
-                    apiresult.SetError("EXCEPTION",ex.HResult + "\n\n" +ex.Message + "\n\n" + content);
+                    response = await client.PostAsync(url, HttpUtilities.ParametersToHttpContent(parameters));
                 }
+
+                //leggi risposta
+                if(response.IsSuccessStatusCode)
+                {
+                    //leggi risultato
+                    content = await response.Content.ReadAsStringAsync();
+
+                    if(!Json.isValidJson(content))
+                    {
+                        apiresult.SetError("INVALID_CONTENT", "Url content is not json.");
+                    }
+                    else if(!Json.isValid<T>(content))
+                    {
+                        apiresult.SetError("INVALID_JSON", "Json content is not valid.");
+                    }
+                    else
+                    {
+                        apiresult = Json.Deserialize<AuraAPIResult<T>>(content);
+                    }
+                }
+                else if(HttpUtilities.IsConnectedToInternet() == false)
+                {
+                    apiresult.SetError("INTERNET_NOT_FOUND", "Your internet connection is not found.");
+                }
+                else
+                {
+                    apiresult.SetError("API_NOT_FOUND", "Api url not found.");
+                }
+
             }
-            else if(HttpUtilities.IsConnectedToInternet() == false)
+            catch(Exception ex)
             {
-                apiresult.SetError("INTERNET_NOTFOUND", "Your internet connection is not found.");
-            }
-            else
-            {
-                apiresult.SetError("HOST_NOTFOUND", "Api url not found.");
+                apiresult.SetError("EXCEPTION",Json.Serialize(new AuraAPIException(ex.HResult.ToString(),ex.Message,ex.StackTrace,content)));
             }
 
             return apiresult;
@@ -101,6 +109,22 @@ namespace AuraRT.Utilities
         {
             this.code = code;
             this.message = message;
+        }
+    }
+
+    public class AuraAPIException
+    {
+        public string hresult { get; set; }
+        public string message { get; set; }
+        public string stacktrace { get; set; }
+        public string urlcontent { get; set; }
+
+        public AuraAPIException(string hres, string mes, string st, string con)
+        {
+            this.hresult = hres;
+            this.message = mes;
+            this.stacktrace = st;
+            this.urlcontent = con;
         }
     }
 
