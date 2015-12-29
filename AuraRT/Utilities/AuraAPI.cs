@@ -43,7 +43,7 @@ namespace AuraRT.Utilities
                     {
                         apiresult.SetError("INVALID_CONTENT", "Url content is not json.");
                     }
-                    else if(!Json.isValid<T>(content))
+                    else if(!Json.isValid<AuraAPIResult<T>>(content))
                     {
                         apiresult.SetError("INVALID_JSON", "Json content is not valid.");
                     }

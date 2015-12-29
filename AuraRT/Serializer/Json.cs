@@ -56,35 +56,28 @@ namespace AuraRT.Serializer
         /// <returns>Ritorna true se la stringa è in formato Json</returns>
         public static bool isValidJson(string content)
         {
-            bool valid = true;
-
             try
             {
                 var token = JToken.Parse(content);
+                return true;
             }
             catch
             {
-                valid = false;
+                return false;
             }
-
-            return valid;
         }
 
         public static bool isValid<T>(string str)
         {
-            bool response = false;
-
             try
             {
                 var jsonobject = Json.Deserialize<T>(str);
-                response = true;
+                return true;
             }
             catch
             {
-                response = false;
+                return false;
             }
-
-            return response;
         }
 
 
