@@ -96,7 +96,9 @@ namespace AuraRT.Utilities
     public enum RequestType
     {
         GET,
-        POST
+        POST,
+        PUT,
+        DELETE
     }
 
     public class AuraAPIError

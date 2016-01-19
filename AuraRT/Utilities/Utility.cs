@@ -173,34 +173,31 @@ namespace AuraRT.Utilities
                 return (false);
         }
 
-        public static Thickness SetMarginTop(FrameworkElement ele, double value)
+        public enum MarginEdge { Top, Right, Bottom, Left }
+
+        public static void SetMargin(FrameworkElement ele, MarginEdge edge, double value)
         {
             Thickness margin = ele.Margin;
-            margin.Top = value;
-            return margin;
-        }
 
-        public static Thickness SetMarginBottom(FrameworkElement ele, double value)
-        {
-            Thickness margin = ele.Margin;
-            margin.Bottom = value;
-            return margin;
-        }
+            switch(edge)
+            {
+                case MarginEdge.Top:
+                    margin.Top = value;
+                    break;
+                case MarginEdge.Right:
+                    margin.Right = value;
+                    break;
+                case MarginEdge.Bottom:
+                    margin.Bottom = value;
+                    break;
+                case MarginEdge.Left:
+                    margin.Left = value;
+                    break;
+            }
 
-        public static Thickness SetMarginLeft(FrameworkElement ele, double value)
-        {
-            Thickness margin = ele.Margin;
-            margin.Left = value;
-            return margin;
+            ele.Margin = margin;
         }
-
-        public static Thickness SetMarginRight(FrameworkElement ele, double value)
-        {
-            Thickness margin = ele.Margin;
-            margin.Right = value;
-            return margin;
-        }
-
+       
         public static bool IsInDesignMode
         {
             get { return Windows.ApplicationModel.DesignMode.DesignModeEnabled; }

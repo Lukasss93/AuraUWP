@@ -44,6 +44,17 @@ namespace AuraRT.Common
                 async () =>
                 {
                     uint resultCount = 0;
+
+                    //inizio carimento
+                    if(LoadingStarted != null)
+                    {
+                        await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            LoadingStarted(this, new IncrementalLoadingStartedEventArgs(count));
+                        });
+                    }
+
+
                     var result = await source.GetPagedItems(currentPage++, itemsPerPage, param);
 
                     if(result == null || result.Count() == 0)
@@ -52,15 +63,7 @@ namespace AuraRT.Common
                     }
                     else
                     {
-
-                        if(LoadingStarted != null)
-                        {
-                            await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                            {
-                                LoadingStarted(this, new IncrementalLoadingStartedEventArgs(count));
-                            });
-                        }
-
+                        
                         resultCount = (uint)result.Count();
                         await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
                         {
@@ -69,6 +72,7 @@ namespace AuraRT.Common
                         });
                     }
 
+                    //fine caricamento
                     if(LoadingCompleted != null)
                     {
                         await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
