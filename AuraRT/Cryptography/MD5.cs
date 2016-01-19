@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Security.Cryptography;
@@ -26,7 +24,6 @@ namespace AuraRT.Cryptography
         
         public static async Task<string> Hash(IStorageFile file)
         {
-
             string res = string.Empty;
 
             using(var streamReader = await file.OpenAsync(FileAccessMode.Read))
@@ -47,7 +44,6 @@ namespace AuraRT.Cryptography
                 }
 
                 res = CryptographicBuffer.EncodeToHexString(algHash.GetValueAndReset());
-
                 return res;
             }
         }

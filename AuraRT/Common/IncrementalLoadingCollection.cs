@@ -11,17 +11,24 @@ using Windows.UI.Xaml.Data;
 
 namespace AuraRT.Common
 {
-    public class IncrementalLoadingCollection<T, I> : ObservableCollection<I>,
-        ISupportIncrementalLoading where T : IIncrementalSource<I>, new()
+    public interface IIncrementalSource<T>
+    {
+        Task<IEnumerable<T>> GetPagedItems(int pageIndex, int pageSize, string param);
+    }
+
+    public class IncrementalLoadingCollection<T, I> : ObservableCollection<I>, ISupportIncrementalLoading where T : IIncrementalSource<I>, new()
     {
         public event EventHandler<IncrementalLoadingStartedEventArgs> LoadingStarted;
         public event EventHandler<IncrementalLoadingCompletedEventArgs> LoadingCompleted;
+        public event EventHandler<IncrementalLoadingErrorEventArgs> LoadingError;
 
         private T source;
         private int itemsPerPage;
         private bool hasMoreItems;
         private int currentPage;
         private string param;
+
+        public string error_code;
 
         public IncrementalLoadingCollection(int itemsPerPage = 20, string param=null)
         {
@@ -55,9 +62,23 @@ namespace AuraRT.Common
                     }
 
 
-                    var result = await source.GetPagedItems(currentPage++, itemsPerPage, param);
+                    IEnumerable<I> result = null;
+                    bool wasException = false;
+                    try
+                    {
+                        result = await source.GetPagedItems(currentPage++, itemsPerPage, param);
+                    }
+                    catch(Exception ex)
+                    {
+                        wasException = true;
 
-                    if(result == null || result.Count() == 0)
+                        await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                        {
+                            LoadingError(this, new IncrementalLoadingErrorEventArgs(ex));
+                        });
+                    }
+
+                    if(result == null || result.Count() == 0 || wasException)
                     {
                         hasMoreItems = false;
                     }
@@ -104,6 +125,17 @@ namespace AuraRT.Common
         public IncrementalLoadingCompletedEventArgs(uint itemsCount)
         {
             ItemsCount = itemsCount;
+        }
+    }
+
+    
+    public class IncrementalLoadingErrorEventArgs
+    {
+        public Exception exception { get; set; }
+
+        public IncrementalLoadingErrorEventArgs(Exception ex)
+        {
+            exception = ex;
         }
     }
 }
