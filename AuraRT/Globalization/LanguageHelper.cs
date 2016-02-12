@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Windows.Globalization;
 using Windows.System.UserProfile;
 
-namespace AuraRT.Localization
+namespace AuraRT.Globalization
 {
     public class LanguageHelper
     {

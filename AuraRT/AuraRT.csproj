@@ -85,25 +85,21 @@
     <Compile Include="Animations\TapEffect.cs" />
     <Compile Include="Animations\TiltEffect.cs" />
     <Compile Include="Animations\TiltEffectNew.cs" />
-    <Compile Include="Common\AlphaKeyGroup.cs" />
     <Compile Include="Common\BaseModel.cs" />
     <Compile Include="Common\ContinuationManager.cs" />
     <Compile Include="Common\IncrementalLoadingCollection.cs" />
     <Compile Include="Common\NavigationHelper.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
-    <Compile Include="Common\SemanticZoomGroup.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Controls\Changelog.cs" />
-    <Compile Include="Controls\InfoPro.cs" />
-    <Compile Include="Controls\MyApps.cs" />
-    <Compile Include="Controls\Settings.cs" />
-    <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="Converters\RemoveFirstWord.cs" />
+    <Compile Include="Converters\ToUpper.cs" />
     <Compile Include="Cryptography\AES.cs" />
     <Compile Include="Cryptography\MD5.cs" />
     <Compile Include="Cryptography\RSA.cs" />
     <Compile Include="Cryptography\SHA256.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
+    <Compile Include="Globalization\LocalizedStrings.cs" />
     <Compile Include="Utilities\AuraAPI.cs" />
     <Compile Include="Utilities\DateTimeUtilities.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
@@ -153,7 +149,6 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

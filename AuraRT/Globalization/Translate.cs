@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Resources;
 
-namespace AuraRT.Localization
+namespace AuraRT.Globalization
 {
     public class Translate
     {

@@ -7,13 +7,20 @@ using Windows.UI.Xaml.Data;
 
 namespace AuraRT.Converters
 {
-    public class ToUpperConverter : IValueConverter
+    public class RemoveFirstWord : IValueConverter
     {
+        /// <summary>
+        /// Rimuove la prima parola da una stringa.
+        /// </summary>
         public object Convert(object value, Type targetType, object parameter, string language)
         {
             if(value is string)
             {
-                return ((string)value).ToUpper();
+                var thestring = ((string)value);
+                var list = thestring.Split(' ').ToList();
+                list.RemoveAt(0);
+
+                return String.Join(" ", list.ToArray());
             }
 
             return value;

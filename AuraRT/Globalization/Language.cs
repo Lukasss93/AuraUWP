@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
-namespace AuraRT.Localization
+namespace AuraRT.Globalization
 {
     [Bindable]
     public class Language

@@ -31,10 +31,11 @@ namespace AuraRT.Utilities
         
         public static string ParametersToString(Dictionary<string, string> parameters)
         {
-            string output = "";
+            string output = String.Empty;
 
-            if(parameters != null)
+            if(parameters != null && parameters.Count>0)
             {
+                output += "?";
                 int i = 0;
                 foreach(var parameter in parameters)
                 {

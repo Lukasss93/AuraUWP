@@ -197,10 +197,5 @@ namespace AuraRT.Utilities
 
             ele.Margin = margin;
         }
-       
-        public static bool IsInDesignMode
-        {
-            get { return Windows.ApplicationModel.DesignMode.DesignModeEnabled; }
-        }
     }
 }

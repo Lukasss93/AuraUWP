@@ -24,13 +24,20 @@ namespace AuraRT.Utilities
                 HttpClient client = new HttpClient();
                 HttpResponseMessage response = null;
 
-                if(type == RequestType.GET)
+                switch(type)
                 {
-                    response = await client.GetAsync(url + "?" + HttpUtilities.ParametersToString(parameters));
-                }
-                else
-                {
-                    response = await client.PostAsync(url, HttpUtilities.ParametersToHttpContent(parameters));
+                    case RequestType.GET:
+                        response = await client.GetAsync(url + HttpUtilities.ParametersToString(parameters));
+                        break;
+                    case RequestType.POST:
+                        response = await client.PostAsync(url, HttpUtilities.ParametersToHttpContent(parameters));
+                        break;
+                    case RequestType.PUT:
+                        response = await client.PutAsync(url, HttpUtilities.ParametersToHttpContent(parameters));
+                        break;
+                    case RequestType.DELETE:
+                        response = await client.DeleteAsync(url + HttpUtilities.ParametersToString(parameters));
+                        break;
                 }
 
                 //leggi risposta
