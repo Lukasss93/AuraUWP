@@ -1,5 +1,6 @@
 ﻿using AuraRT.Serializer;
 using AuraRT.Utilities;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,8 @@ namespace AuraRT.Utilities
                     apiresult.SetError("API_NOT_FOUND", "Api url not found.");
                 }
 
+                apiresult.content = content;
+
             }
             catch(Exception ex)
             {
@@ -84,14 +87,18 @@ namespace AuraRT.Utilities
         public AuraAPIError error { get; set; }
         public T output { get; set; }
 
+        [JsonIgnore]
+        public string content { get; set; }
+
         public AuraAPIResult()
         {
             this.status = false;
             this.error = null;
             this.output = default(T);
+            this.content = null;
         }
         
-        public void SetError(string code, string message)
+        internal void SetError(string code, string message)
         {
             this.status = false;
             this.error = new AuraAPIError(code, message);
