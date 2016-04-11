@@ -1,4 +1,6 @@
-﻿using Windows.Storage;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Windows.Storage;
 
 namespace AuraRT.Storage
 {
@@ -31,6 +33,14 @@ namespace AuraRT.Storage
         public static object Get(string key)
         {
             return settings.Values[key];
+        }
+
+        /// <summary>
+        /// Ritorna una lista di tutte le impostazioni
+        /// </summary>
+        public static List<KeyValuePair<string,object>> GetAll()
+        {
+            return settings.Values.ToList();
         }
         
         /// <summary>
