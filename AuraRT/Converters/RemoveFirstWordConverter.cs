@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Data;
 
 namespace AuraRT.Converters
 {
-    public class RemoveFirstWord : IValueConverter
+    public class RemoveFirstWordConverter : IValueConverter
     {
         /// <summary>
         /// Rimuove la prima parola da una stringa.

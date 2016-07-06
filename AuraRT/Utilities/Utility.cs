@@ -22,34 +22,6 @@ namespace AuraRT.Utilities
     public class Utility
     {
         /// <summary>
-        /// Restituisce l'ID univoco del device
-        /// </summary>
-        public static string GetDeviceID(int encodeto=64)
-        {
-            string value=null;
-            switch(encodeto)
-            {
-                case 16:
-                    HardwareToken token = HardwareIdentification.GetPackageSpecificToken(null);
-                    IBuffer hardwareID = token.Id;
-                    HashAlgorithmProvider hasher = HashAlgorithmProvider.OpenAlgorithm("MD5");
-                    IBuffer hashed = hasher.HashData(hardwareID);
-                    string hashedString = CryptographicBuffer.EncodeToHexString(hashed);
-                    
-                    value = hashedString;
-                    break;
-
-                case 64:
-                default:
-                    value= CryptographicBuffer.EncodeToBase64String(HardwareIdentification.GetPackageSpecificToken(null).Id);
-                    break;
-            }
-            return value;
-        }
-        
-
-
-        /// <summary>
         /// Verifica se la GUID inserita è corretta
         /// </summary>
         public static bool IsGUID(string expression)
@@ -61,52 +33,39 @@ namespace AuraRT.Utilities
             return (new Regex("^(\\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\\}{0,1})$")).IsMatch(expression);
         }
 
-        /// <summary>
-        /// Restituisce la versione dell'app
-        /// </summary>
-        public static string Appversion()
+        public static async void GoToStoreDetail(string guid = null)
         {
-            PackageVersion version = Package.Current.Id.Version;
-            Object[] major = new Object[] { version.Major, version.Minor, version.Build, version.Revision };
-            return String.Format("{0}.{1}.{2}.{3}", major);
+            guid = guid == null ? CurrentApp.AppId.ToString() : guid;
+            Uri uri = new Uri(string.Format("ms-windows-store:navigate?appid={0}", guid));
+            await Launcher.LaunchUriAsync(uri);
         }
 
-        /// <summary>
-        /// Restituisce il nome dell'app
-        /// </summary>
-        public static String Appname()
+        public static async void GoToStoreRateAndReview(string guid = null)
         {
-            String[] strArray = Package.Current.Id.Name.Split(new Char[] { '.' });
-            if(strArray.Count<String>() == 1)
-            {
-                return Package.Current.Id.Name;
-            }
-            return strArray[strArray.Count<String>() - 1];
+            guid = guid == null ? CurrentApp.AppId.ToString() : guid;
+            Uri uri = new Uri(string.Format("ms-windows-store:reviewapp?appid={0}", guid));
+            await Launcher.LaunchUriAsync(uri);
         }
 
+        public static async void GoToStoreSearch(string keyword)
+        {
+            Uri uri = new Uri(string.Format(@"ms-windows-store:search?keyword={0}", keyword));
+            await Launcher.LaunchUriAsync(uri);
+        }
         
-
-        /// <summary>
-        /// Apre la finestra per votare l'app
-        /// </summary>
-        public static async Task Rate()
+        public static async Task OpenUrl(string url)
         {
-            await Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
+            await Launcher.LaunchUriAsync(new Uri(url));
         }
 
-
-        public static async Task OpenFacebook() { await Launcher.LaunchUriAsync(new Uri("http://www.facebook.com/Lukasss93Dev")); }
-        public static async Task OpenTwitter() { await Launcher.LaunchUriAsync(new Uri("http://twitter.com/JonnyRosworth")); }
-        public static async Task OpenWebSite() { await Launcher.LaunchUriAsync(new Uri("http://windowsphone.lucapatera.it/")); }
-
-        /// <summary>
-        /// Apre la finestra per contattare lo sviluppatore
-        /// </summary>
-        public static async Task ContactMe()
+        public static async Task SendEmail(string email, string subject=null)
         {
             EmailMessage em = new EmailMessage();
-            em.Subject="[FEEDBACK] "+Appname();
-            em.To.Add(new EmailRecipient("windowsphone@lucapatera.it"));
+            if(subject != null)
+            {
+                em.Subject = subject;
+            }
+            em.To.Add(new EmailRecipient(email));
 
             await EmailManager.ShowComposeNewEmailAsync(em);
         }
@@ -118,49 +77,7 @@ namespace AuraRT.Utilities
         {
             VibrationDevice.GetDefault().Vibrate(new TimeSpan(0, 0, 0, 0, milliseconds));
         }
-
-        /// <summary>
-        /// Restituisce la risoluzione X del telefono
-        /// </summary>
-        public static int GetResolutionX()
-        {
-            var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-            double resX=Window.Current.Bounds.Width * scaleFactor;
-            return Convert.ToInt32(resX);
-        }
-
-        /// <summary>
-        /// Restituisce la risoluzione Y del telefono
-        /// </summary>
-        public static int GetResolutionY()
-        {
-            var scaleFactor = DisplayInformation.GetForCurrentView().RawPixelsPerViewPixel;
-            double resY=Window.Current.Bounds.Height * scaleFactor;
-            return Convert.ToInt32(resY);
-        }
         
-        public static string getCurrentMAC()
-        {
-            var networkProfiles = Windows.Networking.Connectivity.NetworkInformation.GetConnectionProfiles();
-
-            //takes the first network adapter
-            var adapter = networkProfiles.First<Windows.Networking.Connectivity.ConnectionProfile>().NetworkAdapter;
-
-            //produces a string in the format: 90de0377-d988-4e1b-b89b-475bbca46e1d
-            string networkAdapterId = adapter.NetworkAdapterId.ToString();
-
-            return networkAdapterId.ToUpper();
-        }
-        
-        public static void goBack()
-        {
-            Frame rootFrame = Window.Current.Content as Frame;
-            if(rootFrame != null && rootFrame.CanGoBack)
-            {
-                rootFrame.GoBack();
-            }
-        }
-
         public static bool isValidEmail(string inputEmail)
         {
             string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +

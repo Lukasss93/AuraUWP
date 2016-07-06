@@ -11,14 +11,8 @@ namespace AuraRT.Globalization
 {
     public class LanguageHelper
     {
-        /// <summary>
-        /// Restituisce il codice della lingua attuale
-        /// </summary>
-        public static string GetPhoneLanguage()
-        {
-            CultureInfo ci = new CultureInfo(GlobalizationPreferences.Languages[0]);
-            return ci.Name;
-        }
+
+        //APP------------------------------------------------------------------------------------------------------------------
 
         /// <summary>
         /// Restituisce il codice della lingua dell'app
@@ -29,31 +23,38 @@ namespace AuraRT.Globalization
         }
 
         /// <summary>
-        /// Imposta la lingua con il codice della lingua ricevuta
-        /// </summary>
-        public static void SetLanguage(string code)
-        {
-            string lang=null;
-
-            if(code=="auto")
-            {
-                lang=GetPhoneLanguage();
-            }
-            else
-            {
-                lang=code;
-            }
-
-            ApplicationLanguages.PrimaryLanguageOverride=lang;
-        }
-
-
-        /// <summary>
         /// Ottiene l'elenco dichiarato dell'app delle lingue supportate
         /// </summary>
         public static IReadOnlyList<string> GetAppAvailableLanguage()
         {
             return ApplicationLanguages.ManifestLanguages;
+        }
+
+        /// <summary>
+        /// Imposta la lingua con il codice della lingua ricevuta
+        /// </summary>
+        public static void SetLanguage(string code)
+        {
+            ApplicationLanguages.PrimaryLanguageOverride = code == "auto" ? GetPhoneLanguagesCode()[0] : code;            
+        }
+
+
+        //PHONE------------------------------------------------------------------------------------------------------------------
+
+        /// <summary>
+        /// Ottiene l'elenco dei codici delle lingue installate nel telefono in ordine di preferenza
+        /// </summary>
+        public static IReadOnlyList<string> GetPhoneLanguagesCode()
+        {
+            var langs = new List<string>();
+
+            foreach(var lang in GlobalizationPreferences.Languages)
+            {
+                CultureInfo ci = new CultureInfo(lang);
+                langs.Add(ci.Name);
+            }
+
+            return langs;
         }
     }
 }

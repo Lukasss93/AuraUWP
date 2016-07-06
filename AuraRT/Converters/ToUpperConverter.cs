@@ -7,7 +7,7 @@ using Windows.UI.Xaml.Data;
 
 namespace AuraRT.Converters
 {
-    public class ToUpper : IValueConverter
+    public class ToUpperConverter : IValueConverter
     {
         /// <summary>
         /// Converte una stringa in maiuscolo.

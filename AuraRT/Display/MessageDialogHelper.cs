@@ -77,9 +77,12 @@ namespace AuraRT.Display
 
             StackPanel stack = new StackPanel();
 
-            TextBlock contenuto = new TextBlock();
-            contenuto.Text=content;
-            stack.Children.Add(contenuto);
+            if(content != null)
+            {
+                TextBlock contenuto = new TextBlock();
+                contenuto.Text = content;
+                stack.Children.Add(contenuto);
+            }
 
             InputScope scope = new InputScope();
             scope.Names.Add(new InputScopeName(scopename));

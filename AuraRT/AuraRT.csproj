@@ -12,10 +12,11 @@
     <RootNamespace>AuraRT</RootNamespace>
     <AssemblyName>AuraRT</AssemblyName>
     <DefaultLanguage>it-IT</DefaultLanguage>
-    <TargetPlatformVersion>8.1</TargetPlatformVersion>
-    <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
+    <TargetPlatformVersion>8.1</TargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -93,8 +94,11 @@
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\RelayCommand.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Converters\RemoveFirstWord.cs" />
-    <Compile Include="Converters\ToUpper.cs" />
+    <Compile Include="Converters\BooleanNegationConverter.cs" />
+    <Compile Include="Converters\RemoveFirstWordConverter.cs" />
+    <Compile Include="Converters\ChangeAlphaConverter.cs" />
+    <Compile Include="Converters\SetColorDarkerConverter.cs" />
+    <Compile Include="Converters\ToUpperConverter.cs" />
     <Compile Include="Cryptography\AES.cs" />
     <Compile Include="Cryptography\MD5.cs" />
     <Compile Include="Cryptography\RSA.cs" />
@@ -116,6 +120,7 @@
     <Compile Include="Extensions\StorageFileExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\VersionExtensions.cs" />
+    <Compile Include="Utilities\DeviceInfo.cs" />
     <Compile Include="Utilities\GeoLocationUtilities.cs" />
     <Compile Include="Utilities\HttpUtilities.cs" />
     <Compile Include="Utilities\IAPHelper.cs" />
@@ -128,7 +133,6 @@
     <Compile Include="Media\MicRecorder.cs" />
     <Compile Include="Display\MessageDialogHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\ReportHelper.cs" />
     <Compile Include="Imaging\ColorUtilities.cs" />
     <Compile Include="Serializer\Json.cs" />
     <Compile Include="Serializer\XmlSerializer.cs" />
@@ -154,9 +158,6 @@
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(TargetPlatformIdentifier)' == '' ">
-    <TargetPlatformIdentifier>WindowsPhoneApp</TargetPlatformIdentifier>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
