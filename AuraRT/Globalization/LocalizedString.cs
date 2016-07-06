@@ -7,16 +7,16 @@ using Windows.ApplicationModel.Resources;
 
 namespace AuraRT.Globalization
 {
-    public class Translate
+    public class LocalizedString
     {
-        private static ResourceLoader traduci = new ResourceLoader();
+        private static ResourceLoader resource = new ResourceLoader();
 
         /// <summary>
         /// Restituisce il valore stringa più appropriato di una risorsa, specificato da un identificatore di risorsa.
         /// </summary>
         public static string Get(string key)
         {
-            string word = traduci.GetString(key);
+            string word = resource.GetString(key);
 
             if(word!="")
             {

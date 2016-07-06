@@ -35,7 +35,11 @@ namespace AuraRT.Globalization
         /// </summary>
         public static void SetLanguage(string code)
         {
-            ApplicationLanguages.PrimaryLanguageOverride = code == "auto" ? GetPhoneLanguagesCode()[0] : code;            
+            var culture = new CultureInfo(code == "auto" ? GetPhoneLanguagesCode()[0] : code);
+
+            ApplicationLanguages.PrimaryLanguageOverride = culture.Name;
+            CultureInfo.DefaultThreadCurrentCulture = culture;
+            CultureInfo.DefaultThreadCurrentUICulture = culture;
         }
 
 

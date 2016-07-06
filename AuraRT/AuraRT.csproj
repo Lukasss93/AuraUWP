@@ -106,7 +106,6 @@
     <Compile Include="Extensions\IListExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\StreamExtensions.cs" />
-    <Compile Include="Globalization\LocalizedStrings.cs" />
     <Compile Include="Utilities\AuraAPI.cs" />
     <Compile Include="Utilities\DateTimeUtilities.cs" />
     <Compile Include="Extensions\ColorExtensions.cs" />
@@ -126,10 +125,8 @@
     <Compile Include="Utilities\IAPHelper.cs" />
     <Compile Include="Imaging\Base64.cs" />
     <Compile Include="Imaging\ImageHelper.cs" />
-    <Compile Include="Globalization\Language.cs" />
     <Compile Include="Globalization\LanguageHelper.cs" />
-    <Compile Include="Globalization\Translate.cs" />
-    <Compile Include="Globalization\Translator.cs" />
+    <Compile Include="Globalization\LocalizedString.cs" />
     <Compile Include="Media\MicRecorder.cs" />
     <Compile Include="Display\MessageDialogHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -141,6 +138,7 @@
     <Compile Include="Storage\AppSettings.cs" />
     <Compile Include="Storage\StorageFilesCopier.cs" />
     <Compile Include="Storage\StorageHelper.cs" />
+    <Compile Include="Utilities\Logger.cs" />
     <Compile Include="Utilities\Utility.cs" />
   </ItemGroup>
   <ItemGroup>
