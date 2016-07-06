@@ -33,21 +33,21 @@ namespace AuraRT.Utilities
             return (new Regex("^(\\{{0,1}([0-9a-fA-F]){8}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){4}-([0-9a-fA-F]){12}\\}{0,1})$")).IsMatch(expression);
         }
 
-        public static async void GoToStoreDetail(string guid = null)
+        public static async Task GoToStoreDetail(string guid = null)
         {
             guid = guid == null ? CurrentApp.AppId.ToString() : guid;
             Uri uri = new Uri(string.Format("ms-windows-store:navigate?appid={0}", guid));
             await Launcher.LaunchUriAsync(uri);
         }
 
-        public static async void GoToStoreRateAndReview(string guid = null)
+        public static async Task GoToStoreRateAndReview(string guid = null)
         {
             guid = guid == null ? CurrentApp.AppId.ToString() : guid;
             Uri uri = new Uri(string.Format("ms-windows-store:reviewapp?appid={0}", guid));
             await Launcher.LaunchUriAsync(uri);
         }
 
-        public static async void GoToStoreSearch(string keyword)
+        public static async Task GoToStoreSearch(string keyword)
         {
             Uri uri = new Uri(string.Format(@"ms-windows-store:search?keyword={0}", keyword));
             await Launcher.LaunchUriAsync(uri);
