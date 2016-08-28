@@ -12,7 +12,7 @@ using System.IO;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Net.Http;
 
-namespace AuraRT.Imaging
+namespace AuraUWP.Imaging
 {
     public class ImageHelper
     {
@@ -77,7 +77,6 @@ namespace AuraRT.Imaging
 
         public static async Task SaveImageAsyncFromUri(string filename, StorageFolder folder, Uri url, CreationCollisionOption option)
         {
-
             if(folder != null)
             {
                 StorageFile file = await folder.CreateFileAsync(filename, option);

@@ -2,6 +2,7 @@
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <SkipIntermediatePriGenerationForResourceFiles>false</SkipIntermediatePriGenerationForResourceFiles>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{27F240A8-8CF5-4CDD-8EE3-048A3CD73FAC}</ProjectGuid>
@@ -35,6 +36,7 @@
     <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <PlatformTarget>x86</PlatformTarget>
@@ -107,14 +109,63 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Animations\TapEffect.cs" />
+    <Compile Include="Animations\TapScaleEffect.cs" />
+    <Compile Include="Animations\TiltEffect.cs" />
     <Compile Include="Common\BaseModel.cs" />
+    <Compile Include="Common\ContinuationManager.cs" />
+    <Compile Include="Common\IncrementalLoadingCollection.cs" />
+    <Compile Include="Common\NavigationHelper.cs" />
+    <Compile Include="Common\ObservableDictionary.cs" />
+    <Compile Include="Common\RelayCommand.cs" />
+    <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Converters\BooleanNegationConverter.cs" />
+    <Compile Include="Converters\ChangeAlphaConverter.cs" />
+    <Compile Include="Converters\RemoveFirstWordConverter.cs" />
+    <Compile Include="Converters\SetColorDarkerConverter.cs" />
     <Compile Include="Converters\ToUpperConverter.cs" />
+    <Compile Include="Cryptography\AES.cs" />
+    <Compile Include="Cryptography\MD5.cs" />
+    <Compile Include="Cryptography\RSA.cs" />
+    <Compile Include="Cryptography\SHA256.cs" />
+    <Compile Include="Display\MessageDialogHelper.cs" />
+    <Compile Include="Display\StatusBarHelper.cs" />
+    <Compile Include="Extensions\ColorExtensions.cs" />
+    <Compile Include="Extensions\CommandBarExtensions.cs" />
+    <Compile Include="Extensions\DateTimeExtensions.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="Extensions\IListExtensions.cs" />
+    <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\ListViewExtensions.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
+    <Compile Include="Extensions\PivotExtensions.cs" />
+    <Compile Include="Extensions\StatusBarExtensions.cs" />
+    <Compile Include="Extensions\StorageFileExtensions.cs" />
+    <Compile Include="Extensions\StreamExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Extensions\VersionExtensions.cs" />
+    <Compile Include="Globalization\LanguageHelper.cs" />
+    <Compile Include="Globalization\LocalizedString.cs" />
+    <Compile Include="Imaging\Base64.cs" />
+    <Compile Include="Imaging\ColorUtilities.cs" />
+    <Compile Include="Imaging\ImageHelper.cs" />
+    <Compile Include="Media\MicRecorder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Serializer\Json.cs" />
+    <Compile Include="Serializer\XmlSerializer.cs" />
+    <Compile Include="Storage\AppFileSettings.cs" />
+    <Compile Include="Storage\AppSettings.cs" />
+    <Compile Include="Storage\StorageFilesCopier.cs" />
+    <Compile Include="Storage\StorageHelper.cs" />
+    <Compile Include="Utilities\DateTimeUtilities.cs" />
+    <Compile Include="Utilities\DeviceInfo.cs" />
     <Compile Include="Utilities\DeviceTypeHelper.cs" />
+    <Compile Include="Utilities\GeoLocationUtilities.cs" />
     <Compile Include="Utilities\HttpUtilities.cs" />
+    <Compile Include="Utilities\IAPHelper.cs" />
+    <Compile Include="Utilities\Logger.cs" />
     <Compile Include="Utilities\RestClient.cs" />
+    <Compile Include="Utilities\Utility.cs" />
     <EmbeddedResource Include="Properties\AuraUWP.rd.xml" />
   </ItemGroup>
   <ItemGroup />

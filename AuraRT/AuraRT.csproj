@@ -86,7 +86,6 @@
     <Compile Include="Animations\TapEffect.cs" />
     <Compile Include="Animations\TapScaleEffect.cs" />
     <Compile Include="Animations\TiltEffect.cs" />
-    <Compile Include="Animations\TiltEffectNew.cs" />
     <Compile Include="Common\BaseModel.cs" />
     <Compile Include="Common\ContinuationManager.cs" />
     <Compile Include="Common\IncrementalLoadingCollection.cs" />

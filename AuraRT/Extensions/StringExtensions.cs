@@ -11,17 +11,20 @@ namespace AuraRT.Extensions
 {
     public static class StringExtensions
     {
-        /// <summary>
-        /// Aggiunge uno 0 a sinistra di una stringa se essa ha solo 1 carattere
-        /// </summary>
-        public static string AddZero(this String stringa)
+        #region UPPERS
+
+        public static string ToUpperAt(this String str, int index)
         {
-            return (stringa.Count()==1)?"0"+stringa:stringa;
+            if(index >= str.Length)
+                throw new Exception("Index must be less than or equal to string length.");
+
+            string first = str.Substring(0, index);
+            string middle = str[index].ToString().ToUpper();
+            string last = str.Substring(index + 1);
+
+            return first + middle + last;
         }
 
-        /// <summary>
-        /// Restituisce la stringa con la prima lettera in maiuscolo.
-        /// </summary>
         public static string ToUpperFirst(this String str)
         {
             if(string.IsNullOrEmpty(str))
@@ -32,35 +35,85 @@ namespace AuraRT.Extensions
             return char.ToUpper(str[0]) + str.Substring(1);
         }
 
-        /// <summary>
-        /// Restituisce la stringa con la prima lettera di ogni parola in maiuscolo.
-        /// </summary>
         public static string ToUpperWords(this String str)
         {
-            string output="";
+            string[] words = str.Split(' ');
 
-            string[] stringhe = str.Split(' ');
-
-            int i=0;
-            foreach(string s in stringhe)
+            for(int i=0; i<words.Count(); i++)
             {
-                i++;
-
-                output+=s.ToUpperFirst();
-
-                if(i==stringhe.Count())
-                {
-                    output+=" ";
-                }
+                words[i] = words[i].ToUpperFirst();
             }
 
-            return output;
+            return String.Join(" ", words);
+        }
+
+        #endregion
+
+        #region LOWERS
+
+        public static string ToLowerAt(this String str, int index)
+        {
+            if(index >= str.Length)
+                throw new Exception("Index must be less than or equal to string length.");
+
+            string first = str.Substring(0, index);
+            string middle = str[index].ToString().ToLower();
+            string last = str.Substring(index + 1);
+
+            return first + middle + last;
+        }
+
+        public static string ToLowerFirst(this String str)
+        {
+            if(string.IsNullOrEmpty(str))
+            {
+                return string.Empty;
+            }
+
+            return char.ToLower(str[0]) + str.Substring(1);
+        }
+
+        public static string ToLowerWords(this String str)
+        {
+            string[] words = str.Split(' ');
+
+            for(int i = 0; i < words.Count(); i++)
+            {
+                words[i] = words[i].ToLowerFirst();
+            }
+
+            return String.Join(" ", words);
+        }
+
+        #endregion
+
+
+        public static List<int> AllIndexesOf(this string str, string value)
+        {
+            if(String.IsNullOrEmpty(value))
+                throw new ArgumentException("the string to find may not be empty", "value");
+
+            List<int> indexes = new List<int>();
+            for(int index = 0; ; index += value.Length)
+            {
+                index = str.IndexOf(value, index);
+                if(index == -1)
+                    return indexes;
+                indexes.Add(index);
+            }
         }
 
 
-        /// <summary>
-        /// Restituisce la stringa senza estensione
-        /// </summary>
+
+        public static string AddZero(this String str)
+        {            
+            return (str.Length==1)?"0"+str:str;
+        }
+        
+        
+        
+        
+        
         public static string RemoveExtension(this String str)
         {
             string output = "";
@@ -226,6 +279,8 @@ namespace AuraRT.Extensions
                 }
                 writer.Write(ch);
             }
+
+            writer.Dispose();
 
             return sb.ToString();
         }
