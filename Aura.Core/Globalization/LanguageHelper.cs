@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Globalization;
+using System.Text.RegularExpressions;
 using Windows.Globalization;
 using Windows.System.UserProfile;
 
@@ -55,6 +56,18 @@ namespace Aura.Globalization
             }
 
             return langs;
+        }
+
+        //UTILITY------------------------------------------------------------------------------------------------------------------
+
+        public static bool IsValidISO6392(string expression)
+        {
+            if(expression == null)
+            {
+                return false;
+            }
+
+            return (new Regex("^[a-zA-Z]{2,3}([-][a-zA-Z]{2,3})?$")).IsMatch(expression);
         }
     }
 }

@@ -1,11 +1,21 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Store;
 using Windows.Phone.Devices.Notification;
 using Windows.System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media;
+
+#if WINDOWS_UWP
+using Windows.ApplicationModel.DataTransfer;
+#endif
 
 namespace Aura.Utilities
 {
@@ -68,7 +78,7 @@ namespace Aura.Utilities
             VibrationDevice.GetDefault().Vibrate(new TimeSpan(0, 0, 0, 0, milliseconds));
         }
         
-        public static bool isValidEmail(string inputEmail)
+        public static bool IsValidEmail(string inputEmail)
         {
             string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
                   @"\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\" +
@@ -104,5 +114,68 @@ namespace Aura.Utilities
 
             ele.Margin = margin;
         }
+
+        public static bool IsValidMobileNum(string strln)
+        {
+            return Regex.IsMatch(strln, @"^[1]+[8,3,5,7,4]+\d{9}");
+        }
+
+        public static string MakeStringFromList(List<string> list)
+        {
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < list.Count; i++)
+            {
+                var follow = list.ElementAt(i);
+                sb.Append(follow);
+                if(i != list.Count - 1)
+                {
+                    sb.Append(",");
+                }
+            }
+            return sb.ToString();
+        }
+
+        public static FrameworkElement FindVisualChild(DependencyObject element, string nameOfChildToFind)
+        {
+            for(int x = 0; x < VisualTreeHelper.GetChildrenCount(element); x++)
+            {
+                var child = VisualTreeHelper.GetChild(element, x);
+
+                if(child is FrameworkElement)
+                {
+                    string name = (string)child.GetValue(FrameworkElement.NameProperty);
+
+                    if(name == nameOfChildToFind)
+                    {
+                        return (FrameworkElement)child;
+                    }
+                    else if(VisualTreeHelper.GetChildrenCount(child) > 0)
+                    {
+                        return FindVisualChild(child, nameOfChildToFind);
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        public static bool IsInDesignMode
+        {
+            get { return DesignMode.DesignModeEnabled; }
+        }
+
+        
+#if WINDOWS_UWP
+        public static void CopyToClipBoard(string str)
+        {
+            var dp = new DataPackage
+            {
+                RequestedOperation = DataPackageOperation.Copy,
+            };
+            dp.SetText(str);
+            Clipboard.SetContent(dp);
+        }
+#endif
+
     }
 }

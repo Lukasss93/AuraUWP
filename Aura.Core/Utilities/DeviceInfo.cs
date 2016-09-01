@@ -8,6 +8,12 @@ using Windows.Storage.Streams;
 using Windows.System.Profile;
 using Windows.UI.Xaml;
 
+#if WINDOWS_UWP
+using Windows.Security.ExchangeActiveSyncProvisioning;
+using Windows.UI.ViewManagement;
+#endif
+
+
 namespace Aura.Utilities
 {
     public class DeviceInfo
@@ -33,7 +39,7 @@ namespace Aura.Utilities
                 return Package.Current.Id.Name;
             }
         }
-
+        
         /// <summary>
         /// Restituisce la versione dell'app
         /// </summary>
@@ -64,6 +70,15 @@ namespace Aura.Utilities
         public static string FamilyName()
         {
             return Package.Current.Id.FamilyName;
+        }
+
+        public static string Architecture
+        {
+            get
+            {
+                Package package = Package.Current;
+                return package.Id.Architecture.ToString();
+            }
         }
 
         /// <summary>
@@ -159,5 +174,100 @@ namespace Aura.Utilities
 
             return networkAdapterId.ToUpper();
         }
+        
+
+#if WINDOWS_UWP
+
+        public static string DisplayName()
+        {
+            return Package.Current.DisplayName;
+        }
+
+        public static Uri Logo()
+        {
+            return Package.Current.Logo;
+        }
+
+        public static string Description()
+        {
+            return Package.Current.Description;
+        }
+
+        public static bool IsDevelopmentMode()
+        {
+            return Package.Current.IsDevelopmentMode;
+        }
+        
+        public static string PublisherDisplayName()
+        {
+            return Package.Current.PublisherDisplayName;
+        }
+                
+
+        public static DeviceFamily GetDeviceFamily()
+        {
+            switch(AnalyticsInfo.VersionInfo.DeviceFamily)
+            {
+                case "Windows.Mobile":
+                    return DeviceFamily.Mobile;
+                case "Windows.Desktop":
+                    return DeviceFamily.Desktop;
+                case "Windows.Universal":
+                    return DeviceFamily.IoT;
+                case "Windows.Team":
+                    return DeviceFamily.SurfaceHub;
+                case "Windows.Xbox":
+                    return DeviceFamily.Xbox;
+                default:
+                    return DeviceFamily.Other;
+            }
+        }
+
+        public static bool IsTabletModeEnabled()
+        {
+            if(GetDeviceFamily() == DeviceFamily.Desktop)
+            {
+                return UIViewSettings.GetForCurrentView().UserInteractionMode == UserInteractionMode.Mouse ? false : true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static Version GetDeviceOsVersion()
+        {
+            string sv = AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
+            ulong v = ulong.Parse(sv);
+            ulong v1 = (v & 0xFFFF000000000000L) >> 48;
+            ulong v2 = (v & 0x0000FFFF00000000L) >> 32;
+            ulong v3 = (v & 0x00000000FFFF0000L) >> 16;
+            ulong v4 = (v & 0x000000000000FFFFL);
+
+            return new Version(Convert.ToInt32(v1), Convert.ToInt32(v2), Convert.ToInt32(v3), Convert.ToInt32(v4));
+        }
+
+        public static string DeviceModel()
+        {
+            EasClientDeviceInformation eas = new EasClientDeviceInformation();
+            return eas.SystemProductName;
+        }
+#endif
+
+
+
     }
+
+#if WINDOWS_UWP
+    public enum DeviceFamily
+    {
+        Mobile,
+        Desktop,
+        IoT,
+        Xbox,
+        SurfaceHub,
+        Other
+    }
+#endif
+
 }

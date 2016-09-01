@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -155,6 +156,10 @@ namespace Aura.Extensions
             return err==0?true:false;
         }
 
+        public static string UrlEncode(this string str)
+        {
+            return WebUtility.UrlEncode(str);
+        }
 
         /// <summary>Correctly URI escapes the given string. </summary>
         /// <param name="value">The string to escape. </param>

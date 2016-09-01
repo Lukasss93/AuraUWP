@@ -137,5 +137,11 @@ namespace Aura.Extensions
         {
             return new DateTime(date.Year, date.Month, date.Day, hour, minute, second);
         }
+
+        public static TimeSpan CalculateTimeDiff(this DateTime time1, DateTime time2)
+        {
+            var timeDiff = time1.Subtract(time2);
+            return timeDiff;
+        }
     }
 }

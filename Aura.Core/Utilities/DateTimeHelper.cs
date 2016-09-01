@@ -49,8 +49,7 @@ namespace Aura.Utilities
             }
 
             return current.Subtract(time);
-
-        }
+        }        
 
     }
 }
