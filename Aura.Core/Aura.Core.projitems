@@ -20,8 +20,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanNegationConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\VisibilityToBooleanConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ShadeColorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ChangeAlphaConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\RemoveFirstWordConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\ColorToSolidColorBrushConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\SolidColorBrushToColorConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\SubstractConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ToLowerConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\ToUpperConverter.cs" />
@@ -48,7 +53,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Display\StatusBarHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Imaging\AuraColors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Imaging\Base64.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Imaging\ColorsHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Imaging\ColorHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Imaging\ImageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Media\MicRecorder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Serializer\Json.cs" />

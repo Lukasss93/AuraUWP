@@ -13,7 +13,7 @@ namespace Aura.Extensions
 
         public static Color Shade(this Color color, int percent)
         {
-            return ColorsHelper.Shade(color, percent);
+            return Imaging.ColorHelper.Shade(color, percent);
         }
     }
 }

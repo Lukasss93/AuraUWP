@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Aura.Extensions;
 using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
@@ -12,9 +13,9 @@ namespace Aura.Imaging
     {
 
 #if WINDOWS_UWP
-        public static Color Accent = (Color)Application.Current.Resources["SystemControlBackgroundAccentBrush"];
+        public static Color Accent = ((SolidColorBrush)Application.Current.Resources["SystemControlBackgroundAccentBrush"]).Color;
 #else
-        public static Color Accent = (Color)Application.Current.Resources["PhoneAccentBrush"];
+        public static Color Accent = ((SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"]).Color;
 #endif
 
         public static Color AccentLight1 = Accent.Shade(30);

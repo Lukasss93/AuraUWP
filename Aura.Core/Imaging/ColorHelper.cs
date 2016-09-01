@@ -8,7 +8,7 @@ using Windows.UI.Xaml.Media;
 
 namespace Aura.Imaging
 {
-    public class ColorsHelper
+    public class ColorHelper
     {
         public static Color Shade(Color color, int percent)
         {
@@ -18,7 +18,7 @@ namespace Aura.Imaging
             if(percent == 0)
                 return color;
 
-            double factor = percent / 100;
+            double factor = Convert.ToDouble(percent) / 100;
 
             int r, g, b;
 
