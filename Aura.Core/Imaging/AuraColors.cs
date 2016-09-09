@@ -13,28 +13,34 @@ namespace Aura.Imaging
     {
 
 #if WINDOWS_UWP
-        public static Color Accent = ((SolidColorBrush)Application.Current.Resources["SystemControlBackgroundAccentBrush"]).Color;
-#else
-        public static Color Accent = ((SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"]).Color;
-#endif
-
-        public static Color AccentLight1 = Accent.Shade(30);
-        public static Color AccentLight2 = Accent.Shade(50);
-        public static Color AccentLight3 = Accent.Shade(70);
-
-        public static Color AccentDark1 = Accent.Shade(-30);
-        public static Color AccentDark2 = Accent.Shade(-50);
-        public static Color AccentDark3 = Accent.Shade(-70);
-
-        public static Color Chrome
+        public static Color AuraAccent
         {
             get
             {
-                if(Application.Current.RequestedTheme == ApplicationTheme.Dark)
-                    return Color.FromArgb(255, 31, 31, 31);
-                return Color.FromArgb(255, 221, 221, 221);
+                return (Color)Application.Current.Resources["SystemAccentColor"];
             }
         }
+#else
+        public static Color AuraAccent
+        {
+            get
+            {
+                return ((SolidColorBrush)Application.Current.Resources["PhoneAccentBrush"]).Color;
+            }            
+        }
+#endif
+
+        public static Color AccentLight1 = AuraAccent.Shade(30);
+        public static Color AccentLight2 = AuraAccent.Shade(50);
+        public static Color AccentLight3 = AuraAccent.Shade(70);
+        public static Color AccentDark1 = AuraAccent.Shade(-30);
+        public static Color AccentDark2 = AuraAccent.Shade(-50);
+        public static Color AccentDark3 = AuraAccent.Shade(-70);
+
+        public static Color AuraChrome = Application.Current.RequestedTheme == ApplicationTheme.Dark ? Color.FromArgb(255, 31, 31, 31) : Color.FromArgb(255, 230, 230, 230);
+        public static Color AuraChromeLight = Application.Current.RequestedTheme == ApplicationTheme.Dark ? Color.FromArgb(255, 43, 43, 43) : Color.FromArgb(255, 242, 242, 242);
+        public static Color AuraChromeDark = Application.Current.RequestedTheme == ApplicationTheme.Dark ? Color.FromArgb(255, 23, 23, 23) : Color.FromArgb(255, 242, 242, 242);
+
 
         public static Color Foreground
         {

@@ -15,6 +15,9 @@
 
     <converters:ShadeColorConverter x:Key="shade"/>
 
+    <!-- FIXED BRUSHES *******************************************************************-->
+    
+    <!--accent-->
     <SolidColorBrush x:Key="AuraAccent" Color="{ThemeResource SystemAccentColor}"/>
     <SolidColorBrush x:Key="AuraAccentLight1" Color="{Binding Source={ThemeResource SystemAccentColor}, Converter={ThemeResource shade}, ConverterParameter=30}"/>
     <SolidColorBrush x:Key="AuraAccentLight2" Color="{Binding Source={ThemeResource SystemAccentColor}, Converter={ThemeResource shade}, ConverterParameter=50}"/>
@@ -23,22 +26,46 @@
     <SolidColorBrush x:Key="AuraAccentDark2" Color="{Binding Source={ThemeResource SystemAccentColor}, Converter={ThemeResource shade}, ConverterParameter=-50}"/>
     <SolidColorBrush x:Key="AuraAccentDark3" Color="{Binding Source={ThemeResource SystemAccentColor}, Converter={ThemeResource shade}, ConverterParameter=-70}"/>
     
-    
-    
+    <!--chrome-->
     <SolidColorBrush x:Key="AuraChrome" Color="{ThemeResource SystemChromeMediumColor}"/>
-    <SolidColorBrush x:Key="AuraBaseMedium" Color="{ThemeResource SystemBaseMediumColor}"/>
+    <SolidColorBrush x:Key="AuraChromeLight" Color="{ThemeResource SystemChromeMediumLowColor}"/>
+    <SolidColorBrush x:Key="AuraChromeDark" Color="{ThemeResource SystemChromeLowColor}"/>
+    <SolidColorBrush x:Key="AuraChromeButtonHigh" Color="{ThemeResource SystemChromeDisabledHighColor}"/>
+    <SolidColorBrush x:Key="AuraChromeButtonLow" Color="{ThemeResource SystemChromeDisabledLowColor}"/>
+    
+    <!--background-->
+    <SolidColorBrush x:Key="AuraBackground" Color="{ThemeResource SystemAltHighColor}"/>
+    <SolidColorBrush x:Key="AuraBackgroundLow1" Color="{ThemeResource SystemAltMediumHighColor}"/>
+    <SolidColorBrush x:Key="AuraBackgroundLow2" Color="{ThemeResource SystemAltMediumColor}"/>
+    <SolidColorBrush x:Key="AuraBackgroundLow3" Color="{ThemeResource SystemAltMediumLowColor}"/>
+    <SolidColorBrush x:Key="AuraBackgroundLow4" Color="{ThemeResource SystemAltLowColor}"/>    
+    
+    <!--foreground-->
+    <SolidColorBrush x:Key="AuraForeground" Color="{ThemeResource SystemBaseHighColor}"/>
+    <SolidColorBrush x:Key="AuraForegroundLow1" Color="{ThemeResource SystemBaseMediumHighColor}"/>
+    <SolidColorBrush x:Key="AuraForegroundLow2" Color="{ThemeResource SystemBaseMediumColor}"/>
+    <SolidColorBrush x:Key="AuraForegroundLow3" Color="{ThemeResource SystemBaseMediumLowColor}"/>
+    <SolidColorBrush x:Key="AuraForegroundLow4" Color="{ThemeResource SystemBaseLowColor}"/>
+
 
     <!-- TEXTBLOCK *******************************************************************-->
-    <Style x:Key="AuraHeaderControl" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="14"/>
-        <Setter Property="Foreground" Value="{ThemeResource AuraBaseMedium}"/>
+    <Style x:Key="AuraTextHeaderControl" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="{ThemeResource AuraForegroundLow3}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
     </Style>
-    
+
+    <Style x:Key="AuraTextHeaderAccent" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="{ThemeResource AuraAccent}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+    </Style>
+
     <!-- HEADER *******************************************************************-->
     <Style x:Key="AuraHeaderIcon" TargetType="FontIcon">
         <Setter Property="Foreground" Value="{ThemeResource AuraAccent}"/>
         <Setter Property="FontSize" Value="30"/>
-        <Setter Property="Glyph" Value="&#xE115;"/>
     </Style>
     
     <Style x:Key="AuraHeaderTitle" TargetType="TextBlock">
@@ -47,6 +74,7 @@
         <Setter Property="FontWeight" Value="SemiBold"/>
         <Setter Property="VerticalAlignment" Value="Center"/>
         <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
     </Style>
 
 
