@@ -1,0 +1,149 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:converters="using:AuraUWP.Converters">
+    
+    <ResourceDictionary.ThemeDictionaries>        
+        <ResourceDictionary x:Key="Dark">
+
+            <!--chrome-->
+            <Color x:Key="AuraChromeColor">#FF1F1F1F</Color>
+            <Color x:Key="AuraChromeLightColor">#FF2B2B2B</Color>
+            <Color x:Key="AuraChromeDarkColor">#FF171717</Color>
+            <Color x:Key="AuraChromeButtonHighColor">#FF333333</Color>
+            <Color x:Key="AuraChromeButtonLowColor">#FF858585</Color>
+
+            <!--background-->
+            <Color x:Key="AuraBackgroundColor">#FF000000</Color>
+            <Color x:Key="AuraBackgroundLow1Color">#CC000000</Color>
+            <Color x:Key="AuraBackgroundLow2Color">#99000000</Color>
+            <Color x:Key="AuraBackgroundLow3Color">#66000000</Color>
+            <Color x:Key="AuraBackgroundLow4Color">#33000000</Color>
+
+            <!--foreground-->
+            <Color x:Key="AuraForegroundColor">#FFFFFFFF</Color>
+            <Color x:Key="AuraForegroundLow1Color">#CCFFFFFF</Color>
+            <Color x:Key="AuraForegroundLow2Color">#99FFFFFF</Color>
+            <Color x:Key="AuraForegroundLow3Color">#66FFFFFF</Color>
+            <Color x:Key="AuraForegroundLow4Color">#33FFFFFF</Color>
+
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+
+            <!--chrome-->
+            <Color x:Key="AuraChromeColor">#FFE6E6E6</Color>
+            <Color x:Key="AuraChromeLightColor">#FFF2F2F2</Color>
+            <Color x:Key="AuraChromeDarkColor">#FFF2F2F2</Color>
+            <Color x:Key="AuraChromeButtonHighColor">#FFCCCCCC</Color>
+            <Color x:Key="AuraChromeButtonLowColor">#FF7A7A7A</Color>
+
+            <!--background-->
+            <Color x:Key="AuraBackgroundColor">#FFFFFFFF</Color>
+            <Color x:Key="AuraBackgroundLow1Color">#CCFFFFFF</Color>
+            <Color x:Key="AuraBackgroundLow2Color">#99FFFFFF</Color>
+            <Color x:Key="AuraBackgroundLow3Color">#66FFFFFF</Color>
+            <Color x:Key="AuraBackgroundLow4Color">#33FFFFFF</Color>
+
+            <!--foreground-->
+            <Color x:Key="AuraForegroundColor">#FF000000</Color>
+            <Color x:Key="AuraForegroundLow1Color">#CC000000</Color>
+            <Color x:Key="AuraForegroundLow2Color">#99000000</Color>
+            <Color x:Key="AuraForegroundLow3Color">#66000000</Color>
+            <Color x:Key="AuraForegroundLow4Color">#33000000</Color>
+            
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+    <converters:ShadeColorConverter x:Key="ShadeColorConverter"/>
+
+    <!-- CONVERTERS *******************************************************************-->
+    <converters:ShadeColorConverter x:Key="shade"/>
+    
+    
+    
+    
+    <!-- THEME BRUSHES *******************************************************************-->
+
+    <!--chrome-->
+    <SolidColorBrush x:Key="AuraChrome" Color="{ThemeResource AuraChromeColor}"/>
+    <SolidColorBrush x:Key="AuraChromeLight" Color="{ThemeResource AuraChromeLightColor}"/>
+    <SolidColorBrush x:Key="AuraChromeDark" Color="{ThemeResource AuraChromeDarkColor}"/>
+    <SolidColorBrush x:Key="AuraChromeButtonHigh" Color="{ThemeResource AuraChromeButtonHighColor}"/>
+    <SolidColorBrush x:Key="AuraChromeButtonLow" Color="{ThemeResource AuraChromeButtonLowColor}"/>
+
+    <!--background-->
+    <SolidColorBrush x:Key="AuraBackground" Color="{ThemeResource AuraBackgroundColor}"/>
+    <SolidColorBrush x:Key="AuraBackgroundLow1" Color="{ThemeResource AuraBackgroundLow1Color}"/>
+    <SolidColorBrush x:Key="AuraBackgroundLow2" Color="{ThemeResource AuraBackgroundLow2Color}"/>
+    <SolidColorBrush x:Key="AuraBackgroundLow3" Color="{ThemeResource AuraBackgroundLow3Color}"/>
+    <SolidColorBrush x:Key="AuraBackgroundLow4" Color="{ThemeResource AuraBackgroundLow4Color}"/>
+
+    <!--foreground-->
+    <SolidColorBrush x:Key="AuraForeground" Color="{ThemeResource AuraForegroundColor}"/>
+    <SolidColorBrush x:Key="AuraForegroundLow1" Color="{ThemeResource AuraForegroundLow1Color}"/>
+    <SolidColorBrush x:Key="AuraForegroundLow2" Color="{ThemeResource AuraForegroundLow2Color}"/>
+    <SolidColorBrush x:Key="AuraForegroundLow3" Color="{ThemeResource AuraForegroundLow3Color}"/>
+    <SolidColorBrush x:Key="AuraForegroundLow4" Color="{ThemeResource AuraForegroundLow4Color}"/>
+    
+    
+    
+    
+    <!-- STATIC BRUSHES *******************************************************************-->
+    
+    <!--accent-->
+	<SolidColorBrush x:Key="AuraAccent" Color="{ThemeResource SystemAccentColor}"/>
+	<SolidColorBrush x:Key="AuraAccentLight1" Color="{Binding Color, Source={ThemeResource AuraAccent}, Converter={ThemeResource shade}, ConverterParameter=30}"/>
+    <SolidColorBrush x:Key="AuraAccentLight2" Color="{Binding Color, Source={ThemeResource AuraAccent}, Converter={ThemeResource shade}, ConverterParameter=50}"/>
+    <SolidColorBrush x:Key="AuraAccentLight3" Color="{Binding Color, Source={ThemeResource AuraAccent}, Converter={ThemeResource shade}, ConverterParameter=70}"/>
+    <SolidColorBrush x:Key="AuraAccentDark1" Color="{Binding Color, Source={ThemeResource AuraAccent}, Converter={ThemeResource shade}, ConverterParameter=-30}"/>
+    <SolidColorBrush x:Key="AuraAccentDark2" Color="{Binding Color, Source={ThemeResource AuraAccent}, Converter={ThemeResource shade}, ConverterParameter=-50}"/>
+    <SolidColorBrush x:Key="AuraAccentDark3" Color="{Binding Color, Source={ThemeResource AuraAccent}, Converter={ThemeResource shade}, ConverterParameter=-70}"/>
+
+    <!--black-->
+    <SolidColorBrush x:Key="AuraBlack" Color="#FF000000"/>
+    <SolidColorBrush x:Key="AuraBlackLow1" Color="#BF000000"/>
+    <SolidColorBrush x:Key="AuraBlackLow2" Color="#7F000000"/>
+    <SolidColorBrush x:Key="AuraBlackLow3" Color="#3F000000"/>
+
+    <!--white-->
+    <SolidColorBrush x:Key="AuraWhite" Color="#FF000000"/>
+    <SolidColorBrush x:Key="AuraWhiteLow1" Color="#BF000000"/>
+    <SolidColorBrush x:Key="AuraWhiteLow2" Color="#7F000000"/>
+    <SolidColorBrush x:Key="AuraWhiteLow3" Color="#3F000000"/>
+
+    
+
+    
+    <!-- TEXTBLOCK *******************************************************************-->
+    <Style x:Key="AuraTextHeaderControl" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Foreground" Value="{ThemeResource AuraForegroundLow3}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="TextWrapping" Value="Wrap"/>
+    </Style>
+
+    <Style x:Key="AuraTextHeaderAccent" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="Foreground" Value="{ThemeResource AuraAccent}"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="Margin" Value="0,10,0,5"/>
+    </Style>
+
+    <!-- HEADER *******************************************************************-->
+    <Style x:Key="AuraHeaderIcon" TargetType="FontIcon">
+        <Setter Property="Foreground" Value="{ThemeResource AuraAccent}"/>
+        <Setter Property="FontSize" Value="30"/>
+    </Style>
+    
+    <Style x:Key="AuraHeaderTitle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="10,0,0,0"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+    </Style>
+
+
+</ResourceDictionary>
